@@ -1,59 +1,93 @@
-import { useState, useEffect, useCallback } from 'react';
-import { supabase } from '../lib/supabase';
-import type { Parcelle } from '../types/database';
+// src/hooks/useParcelles.ts
+// CRUD complet des parcelles via Supabase.
+// Fallback sur MOCK_PARCELLES si Supabase non configuré.
 
-export function useParcelles(userId: string | undefined) {
+import { useState, useEffect, useCallback } from "react";
+import type { Parcelle } from "../types";
+import { MOCK_PARCELLES } from "../data/mockdata";
+
+// Import conditionnel Supabase
+let supabase: any = null;
+try {
+  const mod = await import("../lib/supabase"); // ajuster selon le chemin existant
+  supabase = mod.supabase;
+} catch {
+  // ⚠️ [MOCK] Supabase non disponible - utilisation des données simulées
+}
+
+export function useParcelles(userId?: string) {
   const [parcelles, setParcelles] = useState<Parcelle[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   const fetchParcelles = useCallback(async () => {
-    if (!userId) return;
-    const { data, error } = await supabase
-      .from('parcelles')
-      .select('*')
-      .eq('user_id', userId)
-      .order('created_at', { ascending: false });
-    if (error) throw error;
-    setParcelles(data ?? []);
-    setLoading(false);
+    setLoading(true);
+    try {
+      if (supabase && userId) {
+        const { data, error: err } = await supabase
+          .from("parcelles")
+          .select("*")
+          .eq("user_id", userId)
+          .order("date_creation", { ascending: false });
+
+        if (err) throw err;
+        setParcelles(data ?? []);
+      } else {
+        // ⚠️ [MOCK]
+        await new Promise((r) => setTimeout(r, 500));
+        setParcelles(MOCK_PARCELLES.filter((p) => !userId || p.user_id === userId));
+      }
+    } catch (e: any) {
+      setError(e?.message ?? "Erreur lors du chargement des parcelles");
+    } finally {
+      setLoading(false);
+    }
   }, [userId]);
 
-  useEffect(() => {
-    fetchParcelles();
-  }, [fetchParcelles]);
+  useEffect(() => { fetchParcelles(); }, [fetchParcelles]);
 
-  const createParcelle = useCallback(async (p: Omit<Parcelle, 'id' | 'user_id' | 'created_at' | 'updated_at' | 'irrigation_active'>) => {
-    const { data, error } = await supabase
-      .from('parcelles')
-      .insert({ ...p, user_id: userId })
-      .select()
-      .single();
-    if (error) throw error;
-    setParcelles(prev => [data, ...prev]);
-    return data;
-  }, [userId]);
+  const addParcelle = async (data: Omit<Parcelle, "id" | "date_creation">) => {
+    if (supabase) {
+      const { data: result, error: err } = await supabase
+        .from("parcelles")
+        .insert({ ...data, date_creation: new Date().toISOString() })
+        .select()
+        .single();
+      if (err) throw err;
+      setParcelles((prev) => [result, ...prev]);
+      return result;
+    }
+    // ⚠️ [MOCK]
+    const newP: Parcelle = { ...data, id: `p-${Date.now()}`, date_creation: new Date().toISOString() };
+    setParcelles((prev) => [newP, ...prev]);
+    return newP;
+  };
 
-  const updateParcelle = useCallback(async (id: string, updates: Partial<Parcelle>) => {
-    const { data, error } = await supabase
-      .from('parcelles')
-      .update({ ...updates, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single();
-    if (error) throw error;
-    setParcelles(prev => prev.map(p => p.id === id ? data : p));
-    return data;
-  }, []);
+  const updateParcelle = async (id: string, data: Partial<Parcelle>) => {
+    if (supabase) {
+      const { data: result, error: err } = await supabase
+        .from("parcelles").update(data).eq("id", id).select().single();
+      if (err) throw err;
+      setParcelles((prev) => prev.map((p) => (p.id === id ? result : p)));
+      return result;
+    }
+    // ⚠️ [MOCK]
+    setParcelles((prev) => prev.map((p) => (p.id === id ? { ...p, ...data } : p)));
+  };
 
-  const deleteParcelle = useCallback(async (id: string) => {
-    const { error } = await supabase.from('parcelles').delete().eq('id', id);
-    if (error) throw error;
-    setParcelles(prev => prev.filter(p => p.id !== id));
-  }, []);
+  const deleteParcelle = async (id: string) => {
+    if (supabase) {
+      const { error: err } = await supabase.from("parcelles").delete().eq("id", id);
+      if (err) throw err;
+    }
+    setParcelles((prev) => prev.filter((p) => p.id !== id));
+  };
 
-  const toggleIrrigation = useCallback(async (id: string, active: boolean) => {
-    return updateParcelle(id, { irrigation_active: active });
-  }, [updateParcelle]);
-
-  return { parcelles, loading, createParcelle, updateParcelle, deleteParcelle, toggleIrrigation, refetch: fetchParcelles };
+  return { parcelles, loading, error, refresh: fetchParcelles, addParcelle, updateParcelle, deleteParcelle };
 }
+
+
+
+
+
+
