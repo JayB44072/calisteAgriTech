@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '../../lib/supabase';
-import { useLang } from '../../contexts/LanguageContext';
-import type { Profile, Parcelle } from '../../types/database';
+import { supabase } from '../lib/supabase';
+import { useLang } from '../contexts/LanguageContext';
+import type { Profile, Parcelle } from '../types/database';
 import { Truck, Sprout, MapPin, Phone, Mail, Search } from 'lucide-react';
 
 export function FournisseurView() {

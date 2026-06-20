@@ -99,7 +99,7 @@ export function Footer() {
           <p className="text-sm text-slate-500">
             &copy; {new Date().getFullYear()} CalisteAgriTech. {t('footer.rights')}
           </p>
-          <p className="text-xs text-slate-600">Inspiré du projet WellAgriTech - Cameroun</p>
+          <p className="text-xs text-slate-600">Agriculture intelligente · Cameroun 🌱</p>
         </div>
       </div>
     </footer>

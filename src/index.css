@@ -11,27 +11,11 @@
   scrollbar-color: #475569 transparent;
 }
 
-*::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: #d1d5db;
-  border-radius: 3px;
-}
-
-.dark *::-webkit-scrollbar-thumb {
-  background-color: #475569;
-}
-
-*::-webkit-scrollbar-thumb:hover {
-  background-color: #9ca3af;
-}
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background-color: #d1d5db; border-radius: 3px; }
+.dark *::-webkit-scrollbar-thumb { background-color: #475569; }
+*::-webkit-scrollbar-thumb:hover { background-color: #9ca3af; }
 
 @layer base {
   html {
@@ -40,37 +24,144 @@
     -moz-osx-font-smoothing: grayscale;
     scroll-behavior: smooth;
   }
-
   body {
-    @apply bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-50 transition-colors duration-300;
+    @apply bg-gray-50 dark:bg-slate-900 text-slate-900 dark:text-slate-50 transition-colors duration-300;
   }
 }
 
-@layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.5s ease-out;
-  }
-
-  .animate-slide-up {
-    animation: slideUp 0.4s ease-out both;
-  }
-
-  .animate-slide-in-left {
-    animation: slideInLeft 0.4s ease-out both;
-  }
-}
-
+/* ─── Animations ─────────────────────────────────────── */
 @keyframes fadeIn {
   0% { opacity: 0; }
   100% { opacity: 1; }
 }
-
 @keyframes slideUp {
   0% { opacity: 0; transform: translateY(20px); }
   100% { opacity: 1; transform: translateY(0); }
 }
-
+@keyframes slideDown {
+  0% { opacity: 0; transform: translateY(-12px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
 @keyframes slideInLeft {
   0% { opacity: 0; transform: translateX(-20px); }
   100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInRight {
+  0% { opacity: 0; transform: translateX(20px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  0% { opacity: 0; transform: scale(0.92); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(0.85); }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@layer utilities {
+  .animate-fade-in { animation: fadeIn 0.4s ease-out; }
+  .animate-slide-up { animation: slideUp 0.4s ease-out both; }
+  .animate-slide-down { animation: slideDown 0.3s ease-out both; }
+  .animate-slide-in-left { animation: slideInLeft 0.4s ease-out both; }
+  .animate-slide-in-right { animation: slideInRight 0.4s ease-out both; }
+  .animate-scale-in { animation: scaleIn 0.3s ease-out both; }
+  .animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+  .animate-pulse-slow { animation: pulse-slow 3s ease-in-out infinite; }
+  .animate-float { animation: float 4s ease-in-out infinite; }
+
+  .card-hover {
+    @apply transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5;
+  }
+
+  .bg-agro-gradient {
+    background: linear-gradient(135deg, #16a34a 0%, #0d9488 100%);
+  }
+
+  .glass {
+    @apply bg-white/80 dark:bg-slate-800/80 backdrop-blur-md;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #16a34a, #0d9488);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton-shimmer {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+  .dark .skeleton-shimmer {
+    background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
+    background-size: 200% 100%;
+  }
+}
+
+/* Leaflet fixes — Tailwind preflight sets max-width:100% and height:auto on
+   all <img>, which breaks tile sizing. These overrides restore correct behavior. */
+.leaflet-container {
+  font-family: 'Inter', system-ui, sans-serif;
+  z-index: 0;
+}
+.leaflet-container img,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+  max-width: none !important;
+  max-height: none !important;
+  height: auto;
+  width: auto;
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
+  padding: 0 !important;
+}
+.leaflet-popup-content {
+  margin: 0 !important;
+}
+.leaflet-popup-tip-container {
+  margin-top: -1px;
+}
+.dark .leaflet-popup-content-wrapper {
+  background: #1e293b !important;
+  border-color: rgba(255,255,255,0.1) !important;
+}
+.dark .leaflet-popup-tip {
+  background: #1e293b !important;
+}
+
+/* Input range custom */
+input[type="range"] {
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: currentColor;
+  cursor: pointer;
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.9), 0 0 0 4px currentColor;
+  transition: box-shadow 0.15s;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.9), 0 0 0 5px currentColor;
 }

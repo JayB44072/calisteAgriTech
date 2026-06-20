@@ -10,12 +10,14 @@ export function useBackgroundSimulation(parcelles: Parcelle[], latestData: Recor
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const parcellesRef = useRef(parcelles);
   const latestRef = useRef(latestData);
+  const rlsBlockedRef = useRef(false);
 
   parcellesRef.current = parcelles;
   latestRef.current = latestData;
 
   const simulateTick = useCallback(async () => {
-    const currentParcelles = parcellesRef.current;
+    if (rlsBlockedRef.current) return;
+    const currentParcelles = parcellesRef.current.filter(p => !p.id.startsWith('mock-'));
     if (currentParcelles.length === 0) return;
 
     const inserts: Array<{ parcelle_id: string; temperature: number; humidite_sol: number; humidite_air: number }> = [];
@@ -48,8 +50,20 @@ export function useBackgroundSimulation(parcelles: Parcelle[], latestData: Recor
     }
 
     try {
-      const { error } = await supabase.from('sensor_data').insert(inserts);
-      if (error) console.error('Background simulation error:', error);
+      // Map to sensor_readings schema (temperature → temperature_sol)
+      const rows = inserts.map(r => ({
+        parcelle_id: r.parcelle_id,
+        temperature_sol: r.temperature,
+        humidite_sol: r.humidite_sol,
+        humidite_air: r.humidite_air,
+        user_id: (supabase.auth as any)._currentSession?.user?.id,
+      }));
+      const { error } = await supabase.from('sensor_readings').insert(rows);
+      if (error) {
+        if (error.code === '42501') {
+          rlsBlockedRef.current = true;
+        }
+      }
     } catch {
       // Silent fail - this runs in background
     }

@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
-import { callGemini, AGRONOME_SYSTEM_PROMPT, analyzeParcelle, generateCultureCalendar } from '../../lib/gemini';
+import { callGemini, AGRONOME_SYSTEM_PROMPT, analyzeParcelle, generateCultureCalendar } from '../../lib/groq';
 import { useParcelles } from '../../hooks/useParcelles';
 import { useSensorData } from '../../hooks/useSensorData';
 import { useCalendrier } from '../../hooks/useCalendrier';
+import { usePlan } from '../../contexts/SubscriptionContext';
 import type { ChatMessage } from '../../types/database';
 import {
   Bot,
@@ -16,6 +17,7 @@ import {
   Circle,
   Trash2,
   Sprout,
+  Lock,
 } from 'lucide-react';
 
 interface AITabProps {
@@ -62,10 +64,11 @@ export function AITab({ userId, onNavigateToParcelle }: AITabProps) {
 }
 
 function ChatBot({ userId }: { userId: string }) {
+  const { canDoAI, consumeAI, aiRemaining, plan } = usePlan();
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
-      content: 'Bonjour ! Je suis CalisteAgriTech AI, votre assistant agronome. Posez-moi vos questions sur vos cultures, l\'irrigation, les maladies ou les pratiques agricoles au Cameroun.',
+      content: 'Bonjour ! Je suis CalisteAgriTechIA, votre assistant agronome. Posez-moi vos questions sur vos cultures, l\'irrigation, les maladies ou les pratiques agricoles au Cameroun.',
       timestamp: new Date(),
     },
   ]);
@@ -79,10 +82,19 @@ function ChatBot({ userId }: { userId: string }) {
 
   const handleSend = async () => {
     if (!input.trim() || sending) return;
+    if (!canDoAI()) {
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: `Vous avez atteint la limite de ${plan.limits.aiRequests} requêtes IA pour ce mois (plan ${plan.name}). Passez au plan Pro ou Coopérative pour continuer.`,
+        timestamp: new Date(),
+      }]);
+      return;
+    }
     const userMessage: ChatMessage = { role: 'user', content: input.trim(), timestamp: new Date() };
     setMessages(prev => [...prev, userMessage]);
     setInput('');
     setSending(true);
+    consumeAI();
 
     try {
       const history = messages.map(m => ({ role: m.role, content: m.content }));
@@ -106,13 +118,21 @@ function ChatBot({ userId }: { userId: string }) {
           <h3 className="font-semibold text-gray-900 dark:text-slate-50 text-sm">Assistant Agronome IA</h3>
           <p className="text-xs text-gray-400 dark:text-slate-400">Expert en agriculture camerounaise</p>
         </div>
-        <button
-          onClick={() => setMessages([messages[0]])}
-          className="ml-auto p-2 text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors"
-          title="Nouvelle conversation"
-        >
-          <Trash2 className="w-4 h-4" />
-        </button>
+        <div className="ml-auto flex items-center gap-2">
+          {plan.limits.aiRequests !== -1 && (
+            <div className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full font-medium ${aiRemaining <= 1 ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400' : 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400'}`}>
+              {aiRemaining <= 0 ? <Lock className="w-3 h-3" /> : <Bot className="w-3 h-3" />}
+              {aiRemaining <= 0 ? 'Limite atteinte' : `${aiRemaining} restant${aiRemaining > 1 ? 's' : ''}`}
+            </div>
+          )}
+          <button
+            onClick={() => setMessages([messages[0]])}
+            className="p-2 text-gray-400 dark:text-slate-500 hover:text-gray-600 dark:hover:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-700/50 rounded-lg transition-colors"
+            title="Nouvelle conversation"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+        </div>
       </div>
 
       {/* Messages */}

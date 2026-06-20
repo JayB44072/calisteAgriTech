@@ -1,4 +1,4 @@
-export const ADMIN_EMAIL = 'admin@gmail.com';
+export const ADMIN_EMAIL = 'jayb44072@gmail.com';
 
 export const ROLES = {
   agriculteur: { label: 'Agriculteur', labelEn: 'Farmer', color: 'text-primary-600', bg: 'bg-primary-50 dark:bg-primary-900/20' },

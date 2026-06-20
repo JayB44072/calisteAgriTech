@@ -15,10 +15,21 @@ export function useAuth() {
     });
 
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, s) => {
+      (event, s) => {
         setSession(s);
         setUser(s?.user ?? null);
         setLoading(false);
+
+        // Log sign-in events (silently ignore if table doesn't exist yet)
+        if ((event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') && s?.user) {
+          supabase.from('login_logs').insert({
+            user_id: s.user.id,
+            email: s.user.email,
+            ip_address: null,
+            user_agent: navigator.userAgent.slice(0, 200),
+            status: 'success',
+          }).then(() => {}).catch(() => {});
+        }
       }
     );
 

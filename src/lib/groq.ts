@@ -1,78 +1,59 @@
-const GEMINI_MODEL = 'gemini-2.5-flash';
-const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY as string;
+// Groq API — free tier: 14 400 req/day, Llama 3 70B
+// Obtenir une clé gratuite: https://console.groq.com → API Keys (format gsk_...)
 
-interface GeminiRequestBody {
-  contents: Array<{
-    role: string;
-    parts: Array<{ text: string }>;
-  }>;
-  systemInstruction?: {
-    parts: Array<{ text: string }>;
-  };
-  generationConfig?: {
-    temperature?: number;
-    maxOutputTokens?: number;
-    responseMimeType?: string;
-  };
-}
+const GROQ_MODEL = 'llama-3.3-70b-versatile';
+const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY as string;
+const GROQ_BASE_URL = 'https://api.groq.com/openai/v1';
 
 export async function callGemini(
   userMessage: string,
   systemPrompt?: string,
   history?: Array<{ role: string; content: string }>,
-  responseFormat?: 'text' | 'json'
+  _responseFormat?: 'text' | 'json'
 ): Promise<string> {
-  const contents: GeminiRequestBody['contents'] = [];
+  if (!GROQ_API_KEY || GROQ_API_KEY === 'your-groq-key-here') {
+    throw new Error('Clé Groq manquante. Ajoutez VITE_GROQ_API_KEY dans votre fichier .env\nObtenez une clé gratuite sur console.groq.com');
+  }
+
+  const messages: Array<{ role: string; content: string }> = [];
+
+  if (systemPrompt) {
+    messages.push({ role: 'system', content: systemPrompt });
+  }
 
   if (history) {
     for (const msg of history) {
-      contents.push({
-        role: msg.role === 'assistant' ? 'model' : 'user',
-        parts: [{ text: msg.content }],
-      });
+      messages.push({ role: msg.role === 'assistant' ? 'assistant' : 'user', content: msg.content });
     }
   }
 
-  contents.push({
-    role: 'user',
-    parts: [{ text: userMessage }],
+  messages.push({ role: 'user', content: userMessage });
+
+  const response = await fetch(`${GROQ_BASE_URL}/chat/completions`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${GROQ_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: GROQ_MODEL,
+      messages,
+      temperature: 0.7,
+      max_tokens: 2048,
+    }),
   });
 
-  const payload: GeminiRequestBody = {
-    contents,
-    generationConfig: {
-      temperature: 0.7,
-      maxOutputTokens: 2048,
-      ...(responseFormat === 'json' ? { responseMimeType: 'application/json' } : {}),
-    },
-  };
-
-  if (systemPrompt) {
-    payload.systemInstruction = {
-      parts: [{ text: systemPrompt }],
-    };
-  }
-
-  const response = await fetch(
-    `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${GEMINI_API_KEY}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    }
-  );
-
   if (!response.ok) {
-    const errorText = await response.text();
-    throw new Error(`Erreur Gemini: ${errorText}`);
+    const err = await response.text();
+    throw new Error(`Erreur Groq (${response.status}): ${err}`);
   }
 
   const data = await response.json();
-  return data.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
+  return data.choices?.[0]?.message?.content ?? '';
 }
 
 export const AGRONOME_SYSTEM_PROMPT = `Tu es CalisteAgriTechIA, un expert agronome spécialisé dans l'agriculture au Cameroun. Tu aides l'agriculteur à:
-- Diagnostiquer les maladies des cultures locales (tomates, piments, maïs, manioc, etc.)
+- Diagnostiquer les maladies des cultures locales (tomates, piments, maïs, manioc, plantain, etc.)
 - Choisir les engrais et traitements adaptés au climat tropical camerounais
 - Optimiser les récoltes en fonction des saisons (saison des pluies: mars-octobre, saison sèche: novembre-février)
 - Conseiller sur l'irrigation en fonction des données de capteurs (température, humidité du sol et de l'air)
@@ -94,7 +75,7 @@ export async function analyzeParcelle(
   const avgHumSol = sensorData.reduce((s, d) => s + (d.humidite_sol ?? 0), 0) / sensorData.length;
   const avgHumAir = sensorData.reduce((s, d) => s + (d.humidite_air ?? 0), 0) / sensorData.length;
 
-  const prompt = `Analyse cette parcelle et donne des recommandations d'irrigation:
+  const prompt = `Analyse cette parcelle et donne des recommandations:
 
 Parcelle: ${parcelleNom}
 Culture: ${culture}
@@ -124,29 +105,23 @@ export async function generateCultureCalendar(
 - Date de plantation: ${datePlantation}
 - Région: ${region}, Cameroun
 
-Génère un tableau JSON avec les étapes suivantes (ajuste les durées selon la culture):
-Semis, Repiquage (si applicable), Fertilisation 1, Traitement phytosanitaire 1, Fertilisation 2, Traitement phytosanitaire 2, Récolte
-
-Format JSON requis:
+Réponds UNIQUEMENT avec un tableau JSON (sans texte avant ou après):
 [
   {
     "etape": "nom de l'étape",
     "date_debut": "YYYY-MM-DD",
     "date_fin": "YYYY-MM-DD",
-    "description": "description détaillée de l'action à réaliser"
+    "description": "description détaillée de l'action"
   }
-]
-
-Réponds UNIQUEMENT avec le JSON, sans texte supplémentaire.`;
+]`;
 
   const result = await callGemini(prompt, AGRONOME_SYSTEM_PROMPT, undefined, 'json');
 
   try {
-    const parsed = JSON.parse(result);
-    return Array.isArray(parsed) ? parsed : parsed.etapes ?? parsed.calendar ?? [];
-  } catch {
     const jsonMatch = result.match(/\[[\s\S]*\]/);
     if (jsonMatch) return JSON.parse(jsonMatch[0]);
+    return JSON.parse(result);
+  } catch {
     throw new Error('Format de réponse IA invalide');
   }
 }

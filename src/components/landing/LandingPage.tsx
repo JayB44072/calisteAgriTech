@@ -47,7 +47,7 @@ export function LandingPage({ user, onEnterDashboard, onLogout }: LandingPagePro
       <HeroSection onRegister={openRegister} onDemo={handleDemo} />
       <FeaturesSection />
       <StatsSection />
-      <PricingSection />
+      <PricingSection onRegister={openRegister} />
       <TestimonialsSection />
       <Footer />
 

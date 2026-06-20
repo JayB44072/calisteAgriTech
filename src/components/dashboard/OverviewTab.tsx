@@ -1,6 +1,7 @@
 import { useParcelles } from '../../hooks/useParcelles';
 import { useAllSensorData } from '../../hooks/useSensorData';
 import { useBackgroundSimulation } from '../../hooks/useBackgroundSimulation';
+import { useSensorAlerts } from '../../hooks/useNotifications';
 import { useLang } from '../../contexts/LanguageContext';
 import {
   Thermometer,
@@ -12,7 +13,9 @@ import {
   Activity,
   Sprout,
   Radio,
+  FileDown,
 } from 'lucide-react';
+import { exportDashboardPDF } from '../../lib/pdfExport';
 import {
   AreaChart,
   Area,
@@ -36,6 +39,10 @@ export function OverviewTab({ userId, onNavigateToParcelle, onTabChange }: Overv
   const parcelleIds = parcelles.map(p => p.id);
   const { latestAll, allData, loading: sensorLoading } = useAllSensorData(parcelleIds);
   const { lang } = useLang();
+
+  // Real sensor alerts → in-app + browser notifications
+  const parcelleNames = Object.fromEntries(parcelles.map(p => [p.id, p.nom]));
+  useSensorAlerts(userId, latestAll, parcelleNames);
 
   // Background IoT simulation - invisible, no button
   useBackgroundSimulation(parcelles, latestAll);
@@ -95,15 +102,28 @@ export function OverviewTab({ userId, onNavigateToParcelle, onTabChange }: Overv
             {totalParcelles} {lang === 'fr' ? `parcelle${totalParcelles !== 1 ? 's' : ''}` : `parcel${totalParcelles !== 1 ? 's' : ''}`} - {totalSuperficie.toFixed(1)} ha
           </p>
         </div>
-        {/* Live indicator - replaces simulate button */}
-        <motion.div
-          animate={{ opacity: [0.5, 1, 0.5] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          className="flex items-center gap-2 text-xs text-primary-600 dark:text-primary-400"
-        >
-          <Radio className="w-4 h-4" />
-          {lang === 'fr' ? 'Capteurs en direct' : 'Live Sensors'}
-        </motion.div>
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => {
+              const firstSensor = Object.values(latestAll)[0];
+              exportDashboardPDF({
+                parcelles,
+                sensorSummary: firstSensor ? { temperature: firstSensor.temperature ?? undefined, humidite_sol: firstSensor.humidite_sol ?? undefined, humidite_air: firstSensor.humidite_air ?? undefined } : undefined,
+              });
+            }}
+            className="flex items-center gap-2 border border-gray-200 dark:border-slate-600 hover:bg-gray-50 dark:hover:bg-slate-700 text-gray-700 dark:text-slate-300 px-4 py-2 rounded-xl text-sm font-medium transition-all">
+            <FileDown className="w-4 h-4" /> Rapport PDF
+          </button>
+          {/* Live indicator */}
+          <motion.div
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            className="flex items-center gap-2 text-xs text-primary-600 dark:text-primary-400"
+          >
+            <Radio className="w-4 h-4" />
+            {lang === 'fr' ? 'Capteurs en direct' : 'Live Sensors'}
+          </motion.div>
+        </div>
       </div>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

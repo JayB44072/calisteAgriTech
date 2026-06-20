@@ -2,7 +2,11 @@ import { motion } from 'framer-motion';
 import { useLang } from '../../contexts/LanguageContext';
 import { Check, Sparkles } from 'lucide-react';
 
-export function PricingSection() {
+interface PricingSectionProps {
+  onRegister: () => void;
+}
+
+export function PricingSection({ onRegister }: PricingSectionProps) {
   const { t } = useLang();
 
   const freeFeatures = [t('pricing.free.f1'), t('pricing.free.f2'), t('pricing.free.f3'), t('pricing.free.f4')];
@@ -46,7 +50,7 @@ export function PricingSection() {
                 </li>
               ))}
             </ul>
-            <button className="w-full py-3 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium rounded-xl hover:border-primary-300 dark:hover:border-primary-600 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+            <button onClick={onRegister} className="w-full py-3 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-medium rounded-xl hover:border-primary-300 dark:hover:border-primary-600 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
               {t('pricing.cta')}
             </button>
           </motion.div>
@@ -75,7 +79,7 @@ export function PricingSection() {
                 </li>
               ))}
             </ul>
-            <button className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-xl shadow-lg shadow-primary-600/20 transition-colors">
+            <button onClick={onRegister} className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-xl shadow-lg shadow-primary-600/20 transition-colors">
               {t('pricing.cta')}
             </button>
           </motion.div>
