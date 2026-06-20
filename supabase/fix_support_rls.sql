@@ -12,7 +12,7 @@ CREATE POLICY "Admins manage all tickets" ON public.support_tickets
     EXISTS (
       SELECT 1 FROM public.profiles
       WHERE id = auth.uid()
-        AND (role = 'admin' OR email = 'jayb44072@gmail.com') -- ⚠️ ADMIN_EMAIL
+        AND (role = 'admin' OR email = 'calistembarga@gmail.com') -- ⚠️ ADMIN_EMAIL
     )
   );
 
@@ -24,14 +24,14 @@ CREATE POLICY "Admins update all tickets" ON public.support_tickets
     EXISTS (
       SELECT 1 FROM public.profiles
       WHERE id = auth.uid()
-        AND (role = 'admin' OR email = 'jayb44072@gmail.com') -- ⚠️ ADMIN_EMAIL
+        AND (role = 'admin' OR email = 'calistembarga@gmail.com') -- ⚠️ ADMIN_EMAIL
     )
   );
 
 -- 3. S'assurer que le profil admin a le bon rôle
 UPDATE public.profiles
 SET role = 'admin', updated_at = now()
-WHERE email = 'jayb44072@gmail.com'; -- ⚠️ ADMIN_EMAIL
+WHERE email = 'calistembarga@gmail.com'; -- ⚠️ ADMIN_EMAIL
 
 -- 4. Activer realtime sur support_tickets (si pas déjà fait)
 ALTER PUBLICATION supabase_realtime ADD TABLE public.support_tickets;

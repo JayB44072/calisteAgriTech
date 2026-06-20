@@ -24,7 +24,7 @@ ALTER TABLE login_logs ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY "admin_read_login_logs" ON login_logs
   FOR SELECT USING (
-    EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND (role = 'admin' OR email = 'jayb44072@gmail.com'))
+    EXISTS (SELECT 1 FROM profiles WHERE id = auth.uid() AND (role = 'admin' OR email = 'calistembarga@gmail.com'))
   );
 
 CREATE POLICY "insert_login_log" ON login_logs
