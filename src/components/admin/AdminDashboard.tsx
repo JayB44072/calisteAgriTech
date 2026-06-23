@@ -403,7 +403,8 @@ function UsersPanel() {
 
   const loadUsers = useCallback(async () => {
     const { data, error } = await supabase.from('profiles').select('*').order('created_at', { ascending: false });
-    if (!error && data) setUsers(data as ProfileExtended[]);
+    if (error) { console.error('[loadUsers]', error); alert('Erreur chargement users: ' + error.message); }
+    if (data) setUsers(data as ProfileExtended[]);
     setLoading(false);
   }, []);
 
@@ -411,13 +412,14 @@ function UsersPanel() {
 
   const handleBlock = async (userId: string, hours: number) => {
     const blockedUntil = hours === 0 ? null : new Date(Date.now() + hours * 3600000).toISOString();
-    await supabase.from('profiles').update({
+    const { error } = await supabase.from('profiles').update({
       status: 'suspended',
       blocked_until: blockedUntil,
       updated_at: new Date().toISOString(),
     }).eq('id', userId);
 
-    // Notifier l'utilisateur
+    if (error) { console.error('[handleBlock]', error); alert('Erreur suspension: ' + error.message); return; }
+
     await supabase.from('notifications').insert({
       user_id: userId,
       titre: 'Compte suspendu',
@@ -431,11 +433,13 @@ function UsersPanel() {
   };
 
   const handleUnblock = async (userId: string) => {
-    await supabase.from('profiles').update({
+    const { error } = await supabase.from('profiles').update({
       status: 'active',
       blocked_until: null,
       updated_at: new Date().toISOString(),
     }).eq('id', userId);
+
+    if (error) { console.error('[handleUnblock]', error); alert('Erreur réactivation: ' + error.message); return; }
 
     await supabase.from('notifications').insert({
       user_id: userId,
@@ -448,14 +452,14 @@ function UsersPanel() {
   };
 
   const handleDelete = async (userId: string) => {
-    // Marquer comme supprimé (soft delete pour que l'utilisateur voie le message)
-    await supabase.from('profiles').update({
+    const { error } = await supabase.from('profiles').update({
       status: 'deleted',
       deleted_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
     }).eq('id', userId);
 
-    // Notification dans l'app
+    if (error) { console.error('[handleDelete]', error); alert('Erreur suppression: ' + error.message); return; }
+
     await supabase.from('notifications').insert({
       user_id: userId,
       titre: 'Compte supprimé',
