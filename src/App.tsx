@@ -24,7 +24,7 @@ import { requestBrowserNotifications } from './hooks/useNotifications';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { SubscriptionProvider, usePlan } from './contexts/SubscriptionContext';
-import { ADMIN_EMAIL } from './lib/constants';
+import { ADMIN_EMAILS } from './lib/constants';
 import { LandingPage } from './components/landing/LandingPage';
 import { AppLayout, type TabId } from './components/layout/AppLayout';
 import { OverviewTab } from './components/dashboard/OverviewTab';
@@ -60,7 +60,7 @@ function AppContent() {
     if (user) requestBrowserNotifications();
   }, [user]);
 
-  const isAdmin = user?.email === ADMIN_EMAIL;
+  const isAdmin = !!user?.email && ADMIN_EMAILS.includes(user.email);
   const userRole = profile?.role ?? 'agriculteur';
 
   useEffect(() => {

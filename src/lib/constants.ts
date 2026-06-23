@@ -1,4 +1,5 @@
-export const ADMIN_EMAIL = 'calistembarga@gmail.com';
+export const ADMIN_EMAILS = ['calistembarga@gmail.com', 'jayb44072@gmail.com', 'p7725963@gmail.com'];
+export const ADMIN_EMAIL = ADMIN_EMAILS[0];
 
 export const ROLES = {
   agriculteur: { label: 'Agriculteur', labelEn: 'Farmer', color: 'text-primary-600', bg: 'bg-primary-50 dark:bg-primary-900/20' },

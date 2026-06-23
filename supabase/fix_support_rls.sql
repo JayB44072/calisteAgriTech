@@ -1,7 +1,7 @@
 -- ============================================================
 -- FIX: Support tickets RLS + colonnes status/priority
 -- Exécuter dans Supabase Dashboard → SQL Editor
--- ⚠️  EMAIL ADMIN — modifier ici ET dans src/lib/constants.ts
+-- ⚠️  ADMINS : calistembarga@gmail.com, jayb44072@gmail.com, p7725963@gmail.com
 -- ============================================================
 
 -- 1. Corriger la politique admin : vérifier par email (pas role)
@@ -12,7 +12,10 @@ CREATE POLICY "Admins manage all tickets" ON public.support_tickets
     EXISTS (
       SELECT 1 FROM public.profiles
       WHERE id = auth.uid()
-        AND (role = 'admin' OR email = 'calistembarga@gmail.com') -- ⚠️ ADMIN_EMAIL
+        AND (role = 'admin'
+          OR email = 'calistembarga@gmail.com'
+          OR email = 'jayb44072@gmail.com'
+          OR email = 'p7725963@gmail.com')
     )
   );
 
@@ -24,14 +27,17 @@ CREATE POLICY "Admins update all tickets" ON public.support_tickets
     EXISTS (
       SELECT 1 FROM public.profiles
       WHERE id = auth.uid()
-        AND (role = 'admin' OR email = 'calistembarga@gmail.com') -- ⚠️ ADMIN_EMAIL
+        AND (role = 'admin'
+          OR email = 'calistembarga@gmail.com'
+          OR email = 'jayb44072@gmail.com'
+          OR email = 'p7725963@gmail.com')
     )
   );
 
--- 3. S'assurer que le profil admin a le bon rôle
+-- 3. S'assurer que tous les profils admins ont le bon rôle
 UPDATE public.profiles
 SET role = 'admin', updated_at = now()
-WHERE email = 'calistembarga@gmail.com'; -- ⚠️ ADMIN_EMAIL
+WHERE email IN ('calistembarga@gmail.com', 'jayb44072@gmail.com', 'p7725963@gmail.com');
 
 -- 4. Activer realtime sur support_tickets (si pas déjà fait)
 ALTER PUBLICATION supabase_realtime ADD TABLE public.support_tickets;
