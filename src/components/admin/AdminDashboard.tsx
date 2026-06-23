@@ -471,6 +471,7 @@ function UsersPanel() {
   };
 
   const filtered = users.filter(u => {
+    if (u.status === 'deleted') return false;
     if (!search) return true;
     const s = search.toLowerCase();
     return u.full_name?.toLowerCase().includes(s) || u.email?.toLowerCase().includes(s);

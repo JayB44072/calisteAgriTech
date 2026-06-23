@@ -20,6 +20,18 @@ export function useProfile(userId: string | undefined) {
 
   useEffect(() => { fetchProfile(); }, [fetchProfile]);
 
+  // Realtime : re-fetch si l'admin modifie le profil (suspension, suppression)
+  useEffect(() => {
+    if (!userId) return;
+    const channel = supabase
+      .channel('profile-changes-' + userId)
+      .on('postgres_changes', {
+        event: 'UPDATE', schema: 'public', table: 'profiles', filter: `id=eq.${userId}`,
+      }, () => { fetchProfile(); })
+      .subscribe();
+    return () => { supabase.removeChannel(channel); };
+  }, [userId, fetchProfile]);
+
   const updateProfile = useCallback(async (updates: Partial<Profile>) => {
     if (!userId) return;
     const { data, error } = await supabase
