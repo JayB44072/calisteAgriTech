@@ -5,7 +5,7 @@ import type { Profile, SupportTicket } from '../../types/database';
 import {
   Users, BarChart3, Headphones, Shield, Search, Send, Ban, CheckCircle,
   Clock, AlertTriangle, Loader2, Trash2, Activity, RefreshCw, ChevronRight,
-  UserCheck, UserX, Wifi, WifiOff, MessageSquare, LogIn,
+  UserCheck, UserX, Wifi, WifiOff, MessageSquare, LogIn, MoreVertical,
 } from 'lucide-react';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -309,6 +309,7 @@ function UserCard({ user, onBlock, onUnblock, onDelete }: {
   onUnblock: (userId: string) => void;
   onDelete: (u: ProfileExtended) => void;
 }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   const isSuspended = user.status === 'suspended' || (user.blocked_until && new Date(user.blocked_until) > new Date());
   const isDeleted = user.status === 'deleted';
 
@@ -322,7 +323,7 @@ function UserCard({ user, onBlock, onUnblock, onDelete }: {
 
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }}
-      className={`bg-white dark:bg-slate-800 rounded-xl border p-4 ${isDeleted ? 'border-red-200 dark:border-red-800/40 opacity-60' : isSuspended ? 'border-amber-200 dark:border-amber-800/40' : 'border-gray-200 dark:border-slate-700'}`}>
+      className={`bg-white dark:bg-slate-800 rounded-xl border p-4 relative ${isDeleted ? 'border-red-200 dark:border-red-800/40 opacity-60' : isSuspended ? 'border-amber-200 dark:border-amber-800/40' : 'border-gray-200 dark:border-slate-700'}`}>
       <div className="flex items-start gap-3">
         {/* Avatar */}
         {user.avatar_url
@@ -348,28 +349,47 @@ function UserCard({ user, onBlock, onUnblock, onDelete }: {
             )}
           </div>
         </div>
-      </div>
 
-      {/* Actions */}
-      {!isDeleted && (
-        <div className="flex items-center gap-2 mt-3 pt-3 border-t border-gray-100 dark:border-slate-700/50">
-          {isSuspended ? (
-            <button onClick={() => onUnblock(user.id)}
-              className="flex items-center gap-1.5 text-xs font-medium text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 hover:bg-green-100 px-3 py-1.5 rounded-lg transition-colors">
-              <UserCheck className="w-3.5 h-3.5" /> Réactiver
+        {/* Menu 3 points */}
+        {!isDeleted && (
+          <div className="relative flex-shrink-0">
+            <button onClick={() => setMenuOpen(v => !v)}
+              className="p-1.5 rounded-lg text-gray-400 hover:text-gray-600 dark:hover:text-slate-300 hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors">
+              <MoreVertical className="w-4 h-4" />
             </button>
-          ) : (
-            <button onClick={() => onBlock(user)}
-              className="flex items-center gap-1.5 text-xs font-medium text-amber-700 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 hover:bg-amber-100 px-3 py-1.5 rounded-lg transition-colors">
-              <Ban className="w-3.5 h-3.5" /> Suspendre
-            </button>
-          )}
-          <button onClick={() => onDelete(user)}
-            className="flex items-center gap-1.5 text-xs font-medium text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 hover:bg-red-100 px-3 py-1.5 rounded-lg transition-colors ml-auto">
-            <Trash2 className="w-3.5 h-3.5" /> Supprimer
-          </button>
-        </div>
-      )}
+            <AnimatePresence>
+              {menuOpen && (
+                <>
+                  <div className="fixed inset-0 z-10" onClick={() => setMenuOpen(false)} />
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: -4 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -4 }}
+                    transition={{ duration: 0.1 }}
+                    className="absolute right-0 top-8 z-20 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg py-1 w-44">
+                    {isSuspended ? (
+                      <button onClick={() => { onUnblock(user.id); setMenuOpen(false); }}
+                        className="w-full flex items-center gap-2 px-3 py-2 text-sm text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors">
+                        <UserCheck className="w-3.5 h-3.5" /> Réactiver
+                      </button>
+                    ) : (
+                      <button onClick={() => { onBlock(user); setMenuOpen(false); }}
+                        className="w-full flex items-center gap-2 px-3 py-2 text-sm text-amber-700 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-900/20 transition-colors">
+                        <Ban className="w-3.5 h-3.5" /> Suspendre
+                      </button>
+                    )}
+                    <div className="border-t border-gray-100 dark:border-slate-700 my-1" />
+                    <button onClick={() => { onDelete(user); setMenuOpen(false); }}
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors">
+                      <Trash2 className="w-3.5 h-3.5" /> Supprimer
+                    </button>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
+          </div>
+        )}
+      </div>
     </motion.div>
   );
 }
