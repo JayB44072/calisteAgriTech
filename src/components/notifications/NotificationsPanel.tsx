@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+﻿import { useState, useRef, useEffect } from 'react';
 import { useNotifications } from '../../hooks/useNotifications';
 import { useAuth } from '../../hooks/useAuth';
 import { Bell, X, AlertTriangle, CheckCircle, Info, AlertCircle, Trash2, Check } from 'lucide-react';
@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const typeConfig = {
   alerte: { icon: AlertTriangle, color: 'text-red-500', bg: 'bg-red-50 dark:bg-red-900/30', border: 'border-red-200 dark:border-red-800/50', dot: 'bg-red-500' },
-  succes: { icon: CheckCircle, color: 'text-emerald-500', bg: 'bg-emerald-50 dark:bg-emerald-900/30', border: 'border-emerald-200 dark:border-emerald-800/50', dot: 'bg-emerald-500' },
+  succes: { icon: CheckCircle, color: 'text-cyan-500', bg: 'bg-cyan-50 dark:bg-cyan-900/30', border: 'border-cyan-200 dark:border-cyan-800/50', dot: 'bg-cyan-500' },
   info: { icon: Info, color: 'text-blue-500', bg: 'bg-blue-50 dark:bg-blue-900/30', border: 'border-blue-200 dark:border-blue-800/50', dot: 'bg-blue-500' },
   avertissement: { icon: AlertCircle, color: 'text-amber-500', bg: 'bg-amber-50 dark:bg-amber-900/30', border: 'border-amber-200 dark:border-amber-800/50', dot: 'bg-amber-500' },
 };
@@ -71,7 +71,7 @@ export function NotificationsPanel() {
               </div>
               <div className="flex items-center gap-2">
                 {unreadCount > 0 && (
-                  <button onClick={markAllRead} className="flex items-center gap-1 text-xs text-emerald-600 dark:text-emerald-400 hover:underline font-medium">
+                  <button onClick={markAllRead} className="flex items-center gap-1 text-xs text-cyan-600 dark:text-cyan-400 hover:underline font-medium">
                     <Check className="w-3 h-3" /> Tout lire
                   </button>
                 )}

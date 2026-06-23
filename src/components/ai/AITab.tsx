@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+﻿import { useState, useRef, useEffect } from 'react';
 import { callGemini, AGRONOME_SYSTEM_PROMPT, analyzeParcelle, generateCultureCalendar } from '../../lib/groq';
 import { useParcelles } from '../../hooks/useParcelles';
 import { useSensorData } from '../../hooks/useSensorData';
@@ -68,7 +68,7 @@ function ChatBot({ userId }: { userId: string }) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
-      content: 'Bonjour ! Je suis CalisteAgriTechIA, votre assistant agronome. Posez-moi vos questions sur vos cultures, l\'irrigation, les maladies ou les pratiques agricoles au Cameroun.',
+      content: 'Bonjour ! Je suis CherilleTechIA, votre assistant agronome. Posez-moi vos questions sur vos cultures, l\'irrigation, les maladies ou les pratiques agricoles au Cameroun.',
       timestamp: new Date(),
     },
   ]);
@@ -120,7 +120,7 @@ function ChatBot({ userId }: { userId: string }) {
         </div>
         <div className="ml-auto flex items-center gap-2">
           {plan.limits.aiRequests !== -1 && (
-            <div className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full font-medium ${aiRemaining <= 1 ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400' : 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400'}`}>
+            <div className={`flex items-center gap-1 text-xs px-2 py-1 rounded-full font-medium ${aiRemaining <= 1 ? 'bg-red-50 dark:bg-red-900/20 text-red-600 dark:text-red-400' : 'bg-cyan-50 dark:bg-cyan-900/20 text-cyan-600 dark:text-cyan-400'}`}>
               {aiRemaining <= 0 ? <Lock className="w-3 h-3" /> : <Bot className="w-3 h-3" />}
               {aiRemaining <= 0 ? 'Limite atteinte' : `${aiRemaining} restant${aiRemaining > 1 ? 's' : ''}`}
             </div>

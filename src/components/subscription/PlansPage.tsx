@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Check, X as XIcon, Sparkles, Zap, Crown, Star,
@@ -36,9 +36,9 @@ const PLAN_COLORS: Record<PlanId, { gradient: string; border: string; btn: strin
     badge: 'Populaire',
   },
   cooperatif: {
-    gradient: 'from-emerald-50 to-teal-50 dark:from-emerald-900/30 dark:to-teal-900/30',
-    border: 'border-emerald-400 dark:border-emerald-500',
-    btn: 'bg-emerald-600 hover:bg-emerald-700',
+    gradient: 'from-cyan-50 to-blue-50 dark:from-cyan-900/30 dark:to-blue-900/30',
+    border: 'border-cyan-400 dark:border-cyan-500',
+    btn: 'bg-cyan-600 hover:bg-cyan-700',
     badge: 'Recommandé',
   },
 };
@@ -64,7 +64,7 @@ const FEATURES: Feature[] = [
 function FeatureValue({ value }: { value: string | boolean }) {
   if (typeof value === 'boolean') {
     return value
-      ? <Check className="w-4 h-4 text-emerald-500 mx-auto" />
+      ? <Check className="w-4 h-4 text-cyan-500 mx-auto" />
       : <XIcon className="w-4 h-4 text-gray-300 dark:text-slate-600 mx-auto" />;
   }
   return <span className="text-xs font-semibold text-gray-700 dark:text-slate-200">{value}</span>;
@@ -87,7 +87,7 @@ export function PlansPage({ currentPlanId, onSubscribe, onCancel }: PlansPagePro
       <div className="max-w-5xl mx-auto space-y-10">
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="text-center">
-          <div className="inline-flex items-center gap-2 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
+          <div className="inline-flex items-center gap-2 bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300 text-xs font-semibold px-3 py-1.5 rounded-full mb-4">
             <Sparkles className="w-3.5 h-3.5" />
             Choisissez votre plan
           </div>
@@ -97,7 +97,7 @@ export function PlansPage({ currentPlanId, onSubscribe, onCancel }: PlansPagePro
           </p>
           {currentPlanId !== 'gratuit' && (
             <p className="mt-3 text-xs text-gray-400 dark:text-slate-500">
-              Plan actif : <span className="font-semibold text-emerald-600 dark:text-emerald-400">{PLANS[currentPlanId].name}</span>
+              Plan actif : <span className="font-semibold text-cyan-600 dark:text-cyan-400">{PLANS[currentPlanId].name}</span>
             </p>
           )}
         </motion.div>
@@ -117,26 +117,26 @@ export function PlansPage({ currentPlanId, onSubscribe, onCancel }: PlansPagePro
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
-                className={`relative bg-gradient-to-b ${colors.gradient} border-2 ${isCurrent ? 'border-emerald-500 dark:border-emerald-400' : colors.border} rounded-2xl p-6 flex flex-col`}
+                className={`relative bg-gradient-to-b ${colors.gradient} border-2 ${isCurrent ? 'border-cyan-500 dark:border-cyan-400' : colors.border} rounded-2xl p-6 flex flex-col`}
               >
                 {colors.badge && !isCurrent && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className={`text-white text-[10px] font-bold px-3 py-1 rounded-full ${planId === 'pro' ? 'bg-blue-600' : 'bg-emerald-600'}`}>
+                    <span className={`text-white text-[10px] font-bold px-3 py-1 rounded-full ${planId === 'pro' ? 'bg-blue-600' : 'bg-cyan-600'}`}>
                       {colors.badge}
                     </span>
                   </div>
                 )}
                 {isCurrent && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <span className="bg-emerald-500 text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1">
+                    <span className="bg-cyan-500 text-white text-[10px] font-bold px-3 py-1 rounded-full flex items-center gap-1">
                       <Check className="w-2.5 h-2.5" /> Plan actif
                     </span>
                   </div>
                 )}
 
                 <div className="flex items-center gap-3 mb-4">
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${planId === 'gratuit' ? 'bg-gray-200 dark:bg-slate-600' : planId === 'pro' ? 'bg-blue-100 dark:bg-blue-900/40' : 'bg-emerald-100 dark:bg-emerald-900/40'}`}>
-                    <Icon className={`w-5 h-5 ${planId === 'gratuit' ? 'text-gray-600 dark:text-slate-300' : planId === 'pro' ? 'text-blue-600 dark:text-blue-400' : 'text-emerald-600 dark:text-emerald-400'}`} />
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${planId === 'gratuit' ? 'bg-gray-200 dark:bg-slate-600' : planId === 'pro' ? 'bg-blue-100 dark:bg-blue-900/40' : 'bg-cyan-100 dark:bg-cyan-900/40'}`}>
+                    <Icon className={`w-5 h-5 ${planId === 'gratuit' ? 'text-gray-600 dark:text-slate-300' : planId === 'pro' ? 'text-blue-600 dark:text-blue-400' : 'text-cyan-600 dark:text-cyan-400'}`} />
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 dark:text-slate-100">{plan.name}</h3>
@@ -157,7 +157,7 @@ export function PlansPage({ currentPlanId, onSubscribe, onCancel }: PlansPagePro
                     const Icon2 = f.icon;
                     return (
                       <li key={f.label} className="flex items-center gap-2 text-sm text-gray-700 dark:text-slate-200">
-                        <Icon2 className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                        <Icon2 className="w-3.5 h-3.5 text-cyan-500 flex-shrink-0" />
                         <span>{f.label}</span>
                         {typeof val === 'string' && <span className="ml-auto text-xs font-bold text-gray-500 dark:text-slate-400">{val}</span>}
                       </li>
@@ -166,7 +166,7 @@ export function PlansPage({ currentPlanId, onSubscribe, onCancel }: PlansPagePro
                 </ul>
 
                 {isCurrent ? (
-                  <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl border-2 border-emerald-400 text-emerald-600 dark:text-emerald-400 text-sm font-semibold">
+                  <div className="flex items-center justify-center gap-2 py-2.5 rounded-xl border-2 border-cyan-400 text-cyan-600 dark:text-cyan-400 text-sm font-semibold">
                     <Check className="w-4 h-4" /> Plan actuel
                   </div>
                 ) : isDowngrade ? (
@@ -202,7 +202,7 @@ export function PlansPage({ currentPlanId, onSubscribe, onCancel }: PlansPagePro
                   {planOrder.map(pid => (
                     <th key={pid} className="px-3 py-3 text-center text-xs font-semibold text-gray-700 dark:text-slate-200">
                       {PLANS[pid].name}
-                      {pid === currentPlanId && <span className="ml-1 text-[9px] font-bold text-emerald-500">✓</span>}
+                      {pid === currentPlanId && <span className="ml-1 text-[9px] font-bold text-cyan-500">✓</span>}
                     </th>
                   ))}
                 </tr>

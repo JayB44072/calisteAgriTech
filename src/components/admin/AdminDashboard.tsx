@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+﻿import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../lib/supabase';
 import { useLang } from '../../contexts/LanguageContext';
 import type { Profile, SupportTicket } from '../../types/database';
@@ -142,7 +142,7 @@ function StatsPanel() {
 
   const kpis = [
     { label: 'Utilisateurs', value: stats.users, icon: Users, color: 'text-primary-600', bg: 'bg-primary-50 dark:bg-primary-900/20' },
-    { label: 'Parcelles', value: stats.parcelles, icon: BarChart3, color: 'text-green-600', bg: 'bg-green-50 dark:bg-green-900/20' },
+    { label: 'Parcelles', value: stats.parcelles, icon: BarChart3, color: 'text-cyan-600', bg: 'bg-cyan-50 dark:bg-cyan-900/20' },
     { label: 'Lectures capteurs', value: stats.sensorReadings, icon: Activity, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20' },
     { label: 'Tickets support', value: stats.tickets, icon: Headphones, color: 'text-amber-600', bg: 'bg-amber-50 dark:bg-amber-900/20' },
   ];
@@ -169,14 +169,14 @@ function StatsPanel() {
           <AreaChart data={activityData}>
             <defs>
               <linearGradient id="sConn" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#6366f1" stopOpacity={0.3} /><stop offset="95%" stopColor="#6366f1" stopOpacity={0} /></linearGradient>
-              <linearGradient id="sLec" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#22c55e" stopOpacity={0.3} /><stop offset="95%" stopColor="#22c55e" stopOpacity={0} /></linearGradient>
+              <linearGradient id="sLec" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#06b6d4" stopOpacity={0.3} /><stop offset="95%" stopColor="#06b6d4" stopOpacity={0} /></linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#334155" strokeOpacity={0.2} />
             <XAxis dataKey="day" tick={{ fontSize: 10 }} stroke="#94a3b8" />
             <YAxis tick={{ fontSize: 10 }} stroke="#94a3b8" />
             <Tooltip contentStyle={tooltipStyle} />
             <Area type="monotone" dataKey="connexions" stroke="#6366f1" fill="url(#sConn)" strokeWidth={2} name="Connexions" />
-            <Area type="monotone" dataKey="lectures" stroke="#22c55e" fill="url(#sLec)" strokeWidth={2} name="Lectures capteurs" />
+            <Area type="monotone" dataKey="lectures" stroke="#06b6d4" fill="url(#sLec)" strokeWidth={2} name="Lectures capteurs" />
           </AreaChart>
         </ResponsiveContainer>
       </div>
@@ -195,8 +195,8 @@ function StatsPanel() {
           <div className="divide-y divide-gray-50 dark:divide-slate-700/50">
             {loginLogs.map(log => (
               <div key={log.id} className="flex items-center gap-3 px-4 py-3">
-                <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${log.status === 'success' ? 'bg-green-100 dark:bg-green-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}>
-                  {log.status === 'success' ? <Wifi className="w-3.5 h-3.5 text-green-600" /> : <WifiOff className="w-3.5 h-3.5 text-red-500" />}
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${log.status === 'success' ? 'bg-cyan-100 dark:bg-cyan-900/30' : 'bg-red-100 dark:bg-red-900/30'}`}>
+                  {log.status === 'success' ? <Wifi className="w-3.5 h-3.5 text-cyan-600" /> : <WifiOff className="w-3.5 h-3.5 text-red-500" />}
                 </div>
                 <div className="flex-1 min-w-0">
                   <p className="text-xs font-medium text-gray-900 dark:text-slate-100 truncate">{log.email ?? '—'}</p>
@@ -204,7 +204,7 @@ function StatsPanel() {
                 </div>
                 <div className="text-right flex-shrink-0">
                   <p className="text-xs text-gray-400 dark:text-slate-500">{new Date(log.created_at).toLocaleString('fr-FR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}</p>
-                  <span className={`text-xs font-medium ${log.status === 'success' ? 'text-green-600' : 'text-red-500'}`}>
+                  <span className={`text-xs font-medium ${log.status === 'success' ? 'text-cyan-600' : 'text-red-500'}`}>
                     {log.status === 'success' ? 'Succès' : 'Échec'}
                   </span>
                 </div>
@@ -314,7 +314,7 @@ function UserCard({ user, onBlock, onUnblock, onDelete }: {
   const isDeleted = user.status === 'deleted';
 
   const roleColor: Record<string, string> = {
-    agriculteur: 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400',
+    agriculteur: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/30 dark:text-cyan-400',
     gestionnaire: 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400',
     fournisseur: 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-400',
     admin: 'bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400',
@@ -369,7 +369,7 @@ function UserCard({ user, onBlock, onUnblock, onDelete }: {
                     className="absolute right-0 top-8 z-20 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl shadow-lg py-1 w-44">
                     {isSuspended ? (
                       <button onClick={() => { onUnblock(user.id); setMenuOpen(false); }}
-                        className="w-full flex items-center gap-2 px-3 py-2 text-sm text-green-600 dark:text-green-400 hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors">
+                        className="w-full flex items-center gap-2 px-3 py-2 text-sm text-cyan-600 dark:text-cyan-400 hover:bg-cyan-50 dark:hover:bg-cyan-900/20 transition-colors">
                         <UserCheck className="w-3.5 h-3.5" /> Réactiver
                       </button>
                     ) : (
@@ -463,7 +463,7 @@ function UsersPanel() {
     await supabase.from('notifications').insert({
       user_id: userId,
       titre: 'Compte supprimé',
-      message: 'Votre compte CalisteAgriTech a été supprimé par l\'administrateur. Contactez le support si c\'est une erreur.',
+      message: 'Votre compte CherilleTech a été supprimé par l\'administrateur. Contactez le support si c\'est une erreur.',
       type: 'alerte',
     });
 
@@ -694,7 +694,7 @@ function SupportPanel() {
   const statusMeta: Record<string, { label: string; color: string; icon: typeof Clock }> = {
     ouvert:   { label: 'Ouvert',   color: 'text-amber-600', icon: Clock },
     en_cours: { label: 'En cours', color: 'text-blue-600',  icon: Loader2 },
-    resolu:   { label: 'Résolu',   color: 'text-green-600', icon: CheckCircle },
+    resolu:   { label: 'Résolu',   color: 'text-cyan-600', icon: CheckCircle },
     ferme:    { label: 'Fermé',    color: 'text-gray-400',  icon: Ban },
   };
 
@@ -704,8 +704,8 @@ function SupportPanel() {
     <div className="space-y-3">
       <div className="flex items-center justify-between">
         <p className="text-xs text-gray-400 dark:text-slate-500">{tickets.length} ticket(s) — en temps réel</p>
-        <div className="flex items-center gap-1 text-xs text-green-600 dark:text-green-400">
-          <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" /> Live
+        <div className="flex items-center gap-1 text-xs text-cyan-600 dark:text-cyan-400">
+          <span className="w-1.5 h-1.5 bg-cyan-500 rounded-full animate-pulse" /> Live
         </div>
       </div>
 

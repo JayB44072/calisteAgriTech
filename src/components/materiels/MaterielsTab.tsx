@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useParcelles } from '../../hooks/useParcelles';
 import { useMaterials, type NewMaterial } from '../../hooks/useMaterials';
 import { useLang } from '../../contexts/LanguageContext';
@@ -11,7 +11,7 @@ import {
 type MaterialStatus = 'actif' | 'inactif' | 'maintenance' | 'hors_service';
 
 const STATUS_CONFIG: Record<MaterialStatus, { label: string; color: string; bg: string; icon: typeof CheckCircle }> = {
-  actif:       { label: 'Actif',        color: 'text-green-600',  bg: 'bg-green-50 dark:bg-green-900/20',  icon: CheckCircle  },
+  actif:       { label: 'Actif',        color: 'text-cyan-600',  bg: 'bg-cyan-50 dark:bg-cyan-900/20',  icon: CheckCircle  },
   inactif:     { label: 'Inactif',      color: 'text-gray-500',   bg: 'bg-gray-50 dark:bg-gray-900/20',    icon: WifiOff      },
   maintenance: { label: 'Maintenance',  color: 'text-amber-600',  bg: 'bg-amber-50 dark:bg-amber-900/20',  icon: Wrench       },
   hors_service:{ label: 'Hors service', color: 'text-red-600',    bg: 'bg-red-50 dark:bg-red-900/20',      icon: AlertTriangle},
@@ -25,12 +25,12 @@ const TYPE_ICONS: Record<string, typeof Cpu> = {
 const TYPES_MAT = ['capteur','pompe','station_meteo','drone','vehicule','outil','autre'];
 
 function BatteryIndicator({ level }: { level: number }) {
-  const color = level > 50 ? 'text-green-500' : level > 20 ? 'text-amber-500' : 'text-red-500';
+  const color = level > 50 ? 'text-cyan-500' : level > 20 ? 'text-amber-500' : 'text-red-500';
   const Icon = level < 20 ? BatteryLow : Battery;
   return <div className="flex items-center gap-1"><Icon className={`w-4 h-4 ${color}`} /><span className={`text-xs font-medium ${color}`}>{level}%</span></div>;
 }
 function SignalIndicator({ level }: { level: number }) {
-  const color = level > 70 ? 'text-green-500' : level > 40 ? 'text-amber-500' : 'text-red-500';
+  const color = level > 70 ? 'text-cyan-500' : level > 40 ? 'text-amber-500' : 'text-red-500';
   return <div className="flex items-center gap-1"><Wifi className={`w-4 h-4 ${color}`} /><span className={`text-xs font-medium ${color}`}>{level}%</span></div>;
 }
 
@@ -45,7 +45,7 @@ function AddDeviceModal({ parcelles, onClose, onSave }: {
   const [error, setError] = useState('');
   const set = (k: keyof NewMaterial, v: any) => setForm(p => ({ ...p, [k]: v }));
 
-  const inputCls = "w-full border border-gray-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all";
+  const inputCls = "w-full border border-gray-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-cyan-500/30 focus:border-cyan-500 transition-all";
   const labelCls = "block text-xs font-semibold text-gray-600 dark:text-slate-400 mb-1.5";
 
   const handleSave = async () => {
@@ -151,7 +151,7 @@ function AddDeviceModal({ parcelles, onClose, onSave }: {
         <div className="flex gap-3 p-6 border-t border-gray-100 dark:border-slate-700">
           <button onClick={onClose} className="flex-1 border border-gray-200 dark:border-slate-600 text-gray-700 dark:text-slate-300 py-2.5 rounded-xl text-sm font-medium hover:bg-gray-50 dark:hover:bg-slate-800 transition-all">Annuler</button>
           <button onClick={handleSave} disabled={saving}
-            className="flex-1 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white py-2.5 rounded-xl text-sm font-semibold transition-all disabled:opacity-50 flex items-center justify-center gap-2">
+            className="flex-1 bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-700 text-white py-2.5 rounded-xl text-sm font-semibold transition-all disabled:opacity-50 flex items-center justify-center gap-2">
             {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Plus className="w-4 h-4" />}
             {saving ? 'Enregistrement...' : 'Ajouter l\'appareil'}
           </button>
@@ -209,7 +209,7 @@ export function MaterielsTab({ userId }: { userId: string }) {
         </div>
         <button
           onClick={() => setShowAdd(true)}
-          className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-emerald-600/20">
+          className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-cyan-600/20">
           <Plus className="w-4 h-4" /> Ajouter un appareil
         </button>
       </div>
@@ -217,8 +217,8 @@ export function MaterielsTab({ userId }: { userId: string }) {
       {/* KPIs */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { label: 'Total appareils', value: materials.length, icon: Cpu, color: 'text-emerald-600', bg: 'bg-emerald-50 dark:bg-emerald-900/20' },
-          { label: 'Actifs', value: activeCount, icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-50 dark:bg-green-900/20' },
+          { label: 'Total appareils', value: materials.length, icon: Cpu, color: 'text-cyan-600', bg: 'bg-cyan-50 dark:bg-cyan-900/20' },
+          { label: 'Actifs', value: activeCount, icon: CheckCircle, color: 'text-cyan-600', bg: 'bg-cyan-50 dark:bg-cyan-900/20' },
           { label: 'Alertes', value: alertCount, icon: AlertTriangle, color: 'text-amber-600', bg: 'bg-amber-50 dark:bg-amber-900/20' },
           { label: 'Parcelles couvertes', value: new Set(materials.filter(m => m.parcelle_id).map(m => m.parcelle_id)).size, icon: Activity, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20' },
         ].map((kpi, i) => (
@@ -249,7 +249,7 @@ export function MaterielsTab({ userId }: { userId: string }) {
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input type="text" value={search} onChange={e => setSearch(e.target.value)}
             placeholder="Rechercher un appareil..."
-            className="w-full pl-9 pr-3 py-2.5 border border-gray-200 dark:border-slate-600 rounded-xl text-sm bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-emerald-500/30" />
+            className="w-full pl-9 pr-3 py-2.5 border border-gray-200 dark:border-slate-600 rounded-xl text-sm bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 outline-none focus:ring-2 focus:ring-cyan-500/30" />
         </div>
         <select value={filterStatus} onChange={e => setFilterStatus(e.target.value as any)}
           className="border border-gray-200 dark:border-slate-600 rounded-xl px-3 py-2.5 text-sm bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 outline-none">
@@ -277,7 +277,7 @@ export function MaterielsTab({ userId }: { userId: string }) {
           <h3 className="font-semibold text-gray-600 dark:text-slate-300 mb-1">Aucun appareil trouvé</h3>
           <p className="text-sm text-gray-400 dark:text-slate-500 mb-4">Ajoutez votre premier appareil IoT</p>
           <button onClick={() => setShowAdd(true)}
-            className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-all">
+            className="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white px-4 py-2 rounded-xl text-sm font-medium transition-all">
             <Plus className="w-4 h-4" /> Ajouter un appareil
           </button>
         </div>

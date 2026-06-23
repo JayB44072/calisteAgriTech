@@ -1,5 +1,5 @@
-// src/lib/animations.ts
-// Bibliothèque d'animations fluides pour WellAgriTech
+﻿// src/lib/animations.ts
+// Bibliothèque d'animations fluides pour CherilleTech
 // Utilise uniquement des classes Tailwind + CSS custom - pas de dépendance externe requise
 
 export const fadeInUp = {

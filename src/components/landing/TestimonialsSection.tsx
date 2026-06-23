@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+﻿import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '../../contexts/LanguageContext';
 import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
@@ -8,8 +8,8 @@ const testimonials = [
     name: 'Jean-Paul Fotso',
     role: { fr: 'Cultivateur de tomates, Centre', en: 'Tomato farmer, Center' },
     quote: {
-      fr: "Grâce à CalisteAgriTech, j'ai réduit ma consommation d'eau de 40% grâce à l'irrigation automatique. Mes récoltes n'ont jamais été aussi abondantes.",
-      en: "Thanks to CalisteAgriTech, I reduced my water consumption by 40% with automatic irrigation. My harvests have never been so abundant.",
+      fr: "Grâce à CherilleTech, j'ai réduit ma consommation d'eau de 40% grâce à l'irrigation automatique. Mes récoltes n'ont jamais été aussi abondantes.",
+      en: "Thanks to CherilleTech, I reduced my water consumption by 40% with automatic irrigation. My harvests have never been so abundant.",
     },
     avatar: 'https://images.pexels.com/photos/220429/pexels-photo-220429.jpeg?auto=compress&cs=tinysrgb&w=80&h=80&dpr=1',
   },

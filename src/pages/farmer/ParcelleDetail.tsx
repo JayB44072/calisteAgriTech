@@ -1,4 +1,4 @@
-// src/pages/farmer/ParcelleDetail.tsx
+﻿// src/pages/farmer/ParcelleDetail.tsx
 // Vue détaillée d'une parcelle avec capteurs, irrigation, matériels, IA
 
 import { useParams, useNavigate } from "react-router-dom";
@@ -50,7 +50,7 @@ export default function ParcelleDetail() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center space-y-3">
-          <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin mx-auto" />
+          <div className="w-10 h-10 border-4 border-cyan-500 border-t-transparent rounded-full animate-spin mx-auto" />
           <p className="text-gray-500 text-sm">Chargement de la parcelle…</p>
         </div>
       </div>
@@ -135,7 +135,7 @@ export default function ParcelleDetail() {
             onClick={() => setActiveTab(tab.key)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 whitespace-nowrap ${
               activeTab === tab.key
-                ? "bg-white shadow-sm text-emerald-700"
+                ? "bg-white shadow-sm text-cyan-700"
                 : "text-gray-600 hover:text-gray-800"
             }`}
           >
@@ -153,7 +153,7 @@ export default function ParcelleDetail() {
             {/* Infos générales */}
             <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
               <h3 className="font-semibold text-gray-800 flex items-center gap-2">
-                <Leaf className="w-5 h-5 text-emerald-500" /> Informations générales
+                <Leaf className="w-5 h-5 text-cyan-500" /> Informations générales
               </h3>
               {[
                 ["Culture actuelle", parcelle.culture_actuelle ?? "—"],
@@ -194,7 +194,7 @@ export default function ParcelleDetail() {
                     { label: "Humidité sol", value: `${reading.humidite_sol}%`, icon: <Droplets className="w-4 h-4" />, color: "text-blue-500" },
                     { label: "Température", value: `${reading.temperature}°C`, icon: <Thermometer className="w-4 h-4" />, color: "text-red-400" },
                     { label: "Humidité air", value: `${reading.humidite_air}%`, icon: <Wind className="w-4 h-4" />, color: "text-cyan-500" },
-                    { label: "pH Sol", value: reading.ph_sol ?? "—", icon: <Leaf className="w-4 h-4" />, color: "text-emerald-500" },
+                    { label: "pH Sol", value: reading.ph_sol ?? "—", icon: <Leaf className="w-4 h-4" />, color: "text-cyan-500" },
                   ].map(({ label, value, icon, color }) => (
                     <div key={label} className="bg-gray-50 rounded-xl p-3">
                       <div className={`flex items-center gap-1 text-xs ${color} font-medium mb-1`}>

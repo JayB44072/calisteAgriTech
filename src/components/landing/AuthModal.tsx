@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '../../contexts/LanguageContext';
 import { supabase } from '../../lib/supabase';
@@ -144,7 +144,7 @@ export function AuthModal({ open, onClose, initialView = 'login', onSuccess }: A
   };
 
   const inputClass = (hasError?: boolean, isSuccess?: boolean) =>
-    `w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border ${hasError ? 'border-red-500' : isSuccess ? 'border-green-500' : 'border-slate-200 dark:border-slate-700'} rounded-lg text-sm text-slate-900 dark:text-slate-100 focus:ring-2 ${hasError ? 'focus:ring-red-500/30' : isSuccess ? 'focus:ring-green-500/30' : 'focus:ring-primary-500/30'} focus:border-primary-500 dark:focus:border-primary-500 outline-none transition-colors placeholder:text-slate-400 dark:placeholder:text-slate-500`;
+    `w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border ${hasError ? 'border-red-500' : isSuccess ? 'border-cyan-500' : 'border-slate-200 dark:border-slate-700'} rounded-lg text-sm text-slate-900 dark:text-slate-100 focus:ring-2 ${hasError ? 'focus:ring-red-500/30' : isSuccess ? 'focus:ring-cyan-500/30' : 'focus:ring-primary-500/30'} focus:border-primary-500 dark:focus:border-primary-500 outline-none transition-colors placeholder:text-slate-400 dark:placeholder:text-slate-500`;
 
   if (!open) return null;
 
@@ -212,7 +212,7 @@ export function AuthModal({ open, onClose, initialView = 'login', onSuccess }: A
                           <div className="relative"><Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" /><input type="email" required value={regForm.email} onChange={e => setRegForm(p => ({ ...p, email: e.target.value }))} placeholder={t('auth.email')} className={inputClass()} /></div>
                           <div className="relative"><Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" /><input type={showPassword ? 'text' : 'password'} required value={regForm.password} onChange={e => setRegForm(p => ({ ...p, password: e.target.value }))} placeholder={t('auth.password')} className={`${inputClass()} pr-10`} /><button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">{showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}</button></div>
                           <div>
-                            <div className="relative"><Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" /><input type={showPassword ? 'text' : 'password'} required value={regForm.confirmPassword} onChange={e => setRegForm(p => ({ ...p, confirmPassword: e.target.value }))} placeholder={t('auth.confirm_password')} className={`${inputClass(!!passwordMismatch, !!passwordsMatch)} pr-10`} />{passwordMismatch && <AlertCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-red-500" />}{passwordsMatch && <CheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-green-500" />}</div>
+                            <div className="relative"><Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" /><input type={showPassword ? 'text' : 'password'} required value={regForm.confirmPassword} onChange={e => setRegForm(p => ({ ...p, confirmPassword: e.target.value }))} placeholder={t('auth.confirm_password')} className={`${inputClass(!!passwordMismatch, !!passwordsMatch)} pr-10`} />{passwordMismatch && <AlertCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-red-500" />}{passwordsMatch && <CheckCircle className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-500" />}</div>
                             {passwordMismatch && <p className="text-xs text-red-500 mt-1 flex items-center gap-1"><AlertCircle className="w-3 h-3" />{t('auth.password_mismatch')}</p>}
                           </div>
                           <button type="button" onClick={() => { if (step1Valid) setRegStep(2); }} disabled={!step1Valid} className="w-full flex items-center justify-center gap-2 bg-primary-600 hover:bg-primary-700 text-white py-2.5 rounded-lg text-sm font-medium transition-colors disabled:opacity-50">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { useParcelles } from '../../hooks/useParcelles';
 import { useLang } from '../../contexts/LanguageContext';
 import { fetchWeather, decodeWeatherCode, CAMEROON_CITIES, type WeatherData } from '../../lib/weather';
@@ -249,8 +249,8 @@ export function MeteoTab({ userId }: { userId: string }) {
           </div>
 
           {/* Irrigation advice */}
-          <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/30 rounded-xl p-5">
-            <h3 className="font-semibold text-emerald-800 dark:text-emerald-300 text-sm mb-3 flex items-center gap-2">
+          <div className="bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800/30 rounded-xl p-5">
+            <h3 className="font-semibold text-cyan-800 dark:text-cyan-300 text-sm mb-3 flex items-center gap-2">
               <Droplets className="w-4 h-4" />
               {lang === 'fr' ? 'Conseil d\'irrigation basé sur la météo réelle' : 'Irrigation advice from live weather'}
             </h3>
@@ -258,10 +258,10 @@ export function MeteoTab({ userId }: { userId: string }) {
               const todayRain = weather.daily[0]?.precipSum ?? 0;
               const tomorrowRain = weather.daily[1]?.precipSum ?? 0;
               const temp = weather.current.temperature;
-              if (todayRain > 10) return <p className="text-sm text-emerald-700 dark:text-emerald-400">Pluies significatives aujourd'hui ({todayRain.toFixed(0)} mm). <strong>Pas d'irrigation nécessaire.</strong></p>;
-              if (tomorrowRain > 8) return <p className="text-sm text-emerald-700 dark:text-emerald-400">Pluies prévues demain ({tomorrowRain.toFixed(0)} mm). <strong>Réduire l'irrigation ce soir.</strong></p>;
-              if (temp > 32) return <p className="text-sm text-emerald-700 dark:text-emerald-400">Températures élevées ({temp.toFixed(0)}°C). <strong>Irriguer tôt le matin (6h-8h) ou en soirée (18h-20h).</strong></p>;
-              return <p className="text-sm text-emerald-700 dark:text-emerald-400">Conditions normales. <strong>Suivez votre plan d'irrigation habituel.</strong></p>;
+              if (todayRain > 10) return <p className="text-sm text-cyan-700 dark:text-cyan-400">Pluies significatives aujourd'hui ({todayRain.toFixed(0)} mm). <strong>Pas d'irrigation nécessaire.</strong></p>;
+              if (tomorrowRain > 8) return <p className="text-sm text-cyan-700 dark:text-cyan-400">Pluies prévues demain ({tomorrowRain.toFixed(0)} mm). <strong>Réduire l'irrigation ce soir.</strong></p>;
+              if (temp > 32) return <p className="text-sm text-cyan-700 dark:text-cyan-400">Températures élevées ({temp.toFixed(0)}°C). <strong>Irriguer tôt le matin (6h-8h) ou en soirée (18h-20h).</strong></p>;
+              return <p className="text-sm text-cyan-700 dark:text-cyan-400">Conditions normales. <strong>Suivez votre plan d'irrigation habituel.</strong></p>;
             })()}
           </div>
         </>

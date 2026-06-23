@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+﻿import { useEffect, useRef, useState } from 'react';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import { useParcelles } from '../../hooks/useParcelles';
@@ -26,9 +26,9 @@ const TILE_LAYERS = {
 const CULTURE_COLORS: Record<string, string> = {
   Tomates: '#ef4444', Maïs: '#f59e0b', Manioc: '#8b5cf6', Riz: '#3b82f6',
   Poivrons: '#f97316', Café: '#92400e', Cacao: '#78350f', Igname: '#059669',
-  Sorgho: '#d97706', Arachides: '#b45309', Plantain: '#65a30d', Haricots: '#16a34a',
+  Sorgho: '#d97706', Arachides: '#b45309', Plantain: '#65a30d', Haricots: '#0891b2',
   Oignons: '#9333ea', Piment: '#dc2626', Gombo: '#15803d', 'Patate douce': '#ea580c',
-  'Légumes verts': '#16a34a', Autre: '#6b7280',
+  'Légumes verts': '#0891b2', Autre: '#6b7280',
 };
 
 const CULTURE_ICONS: Record<string, string> = {
@@ -107,7 +107,7 @@ export function CarteTab({ userId }: { userId: string }) {
     markersRef.current = [];
 
     parcellesWithCoords.forEach(p => {
-      const color  = CULTURE_COLORS[p.culture] ?? '#16a34a';
+      const color  = CULTURE_COLORS[p.culture] ?? '#0891b2';
       const marker = L.marker([p.latitude!, p.longitude!], { icon: createParcelleIcon(p.culture, color) });
 
       marker.bindPopup(`
@@ -123,7 +123,7 @@ export function CarteTab({ userId }: { userId: string }) {
           </div>
           ${p.zone ? `<p style="font-size:12px;color:#6b7280;margin:4px 0">📍 ${p.zone}</p>` : ''}
           ${p.irrigation_active ? `<p style="font-size:12px;color:#2563eb;margin:4px 0">💧 Irrigation active</p>` : ''}
-          <p style="font-size:12px;font-weight:600;color:${p.statut === 'active' ? '#16a34a' : '#9ca3af'};margin:4px 0">● ${p.statut === 'active' ? 'Active' : p.statut}</p>
+          <p style="font-size:12px;font-weight:600;color:${p.statut === 'active' ? '#0891b2' : '#9ca3af'};margin:4px 0">● ${p.statut === 'active' ? 'Active' : p.statut}</p>
         </div>
       `);
 
@@ -152,7 +152,7 @@ export function CarteTab({ userId }: { userId: string }) {
           {Object.entries(TILE_LAYERS).map(([key, val]) => (
             <button key={key} onClick={() => setLayer(key as keyof typeof TILE_LAYERS)}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-                layer === key ? 'bg-white dark:bg-slate-600 text-emerald-700 dark:text-emerald-400 shadow-sm' : 'text-gray-500 dark:text-slate-400'
+                layer === key ? 'bg-white dark:bg-slate-600 text-cyan-700 dark:text-cyan-400 shadow-sm' : 'text-gray-500 dark:text-slate-400'
               }`}>
               <Layers className="w-3.5 h-3.5" />{val.label}
             </button>
@@ -164,7 +164,7 @@ export function CarteTab({ userId }: { userId: string }) {
       <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 shadow-sm relative overflow-hidden" style={{ height: '520px' }}>
         {loading && (
           <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/80 dark:bg-slate-800/80">
-            <Loader2 className="w-8 h-8 text-emerald-500 animate-spin" />
+            <Loader2 className="w-8 h-8 text-cyan-500 animate-spin" />
           </div>
         )}
 
@@ -200,7 +200,7 @@ export function CarteTab({ userId }: { userId: string }) {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             {parcellesWithCoords.map(p => (
               <div key={p.id} className="flex items-center gap-2 p-2.5 rounded-lg bg-gray-50 dark:bg-slate-700/50">
-                <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: CULTURE_COLORS[p.culture] ?? '#16a34a' }} />
+                <div className="w-3 h-3 rounded-full flex-shrink-0" style={{ backgroundColor: CULTURE_COLORS[p.culture] ?? '#0891b2' }} />
                 <div className="min-w-0">
                   <p className="text-xs font-medium text-gray-900 dark:text-white truncate">{p.nom}</p>
                   <p className="text-[10px] text-gray-400 dark:text-slate-500">{p.culture} · {p.superficie} ha</p>
@@ -245,7 +245,7 @@ function ParcelleSearchBox({ parcelles, mapRef }: { parcelles: ParcelleCoord[]; 
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
         <input value={query} onChange={e => setQuery(e.target.value)}
           placeholder="Rechercher une parcelle..."
-          className="w-full pl-9 pr-3 py-2.5 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl text-sm shadow-lg text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30"
+          className="w-full pl-9 pr-3 py-2.5 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 rounded-xl text-sm shadow-lg text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-cyan-500/30"
         />
       </div>
       {filtered.length > 0 && (

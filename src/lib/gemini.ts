@@ -1,4 +1,4 @@
-const GEMINI_MODEL = 'gemini-2.5-flash';
+﻿const GEMINI_MODEL = 'gemini-2.5-flash';
 const GEMINI_API_KEY = import.meta.env.VITE_GEMINI_API_KEY as string;
 
 interface GeminiRequestBody {
@@ -71,7 +71,7 @@ export async function callGemini(
   return data.candidates?.[0]?.content?.parts?.[0]?.text ?? '';
 }
 
-export const AGRONOME_SYSTEM_PROMPT = `Tu es CalisteAgriTechIA, un expert agronome spécialisé dans l'agriculture au Cameroun. Tu aides l'agriculteur à:
+export const AGRONOME_SYSTEM_PROMPT = `Tu es CherilleTechIA, un expert agronome spécialisé dans l'agriculture au Cameroun. Tu aides l'agriculteur à:
 - Diagnostiquer les maladies des cultures locales (tomates, piments, maïs, manioc, etc.)
 - Choisir les engrais et traitements adaptés au climat tropical camerounais
 - Optimiser les récoltes en fonction des saisons (saison des pluies: mars-octobre, saison sèche: novembre-février)

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useProfile } from '../../hooks/useProfile';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -90,7 +90,7 @@ export function AppLayout({ activeTab, onTabChange, children, user, userRole = '
             <item.icon className={`w-5 h-5 flex-shrink-0 ${activeTab === item.id ? 'text-primary-600 dark:text-primary-400' : locked ? 'text-gray-300 dark:text-slate-600' : 'text-gray-400 dark:text-slate-500'}`} />
             <span className={locked ? 'text-gray-400 dark:text-slate-500' : ''}>{lang === 'fr' ? item.labelFr : item.labelEn}</span>
             {locked && <span className="ml-auto text-[9px] font-bold text-amber-500 bg-amber-50 dark:bg-amber-900/20 px-1.5 py-0.5 rounded-full">PRO</span>}
-            {item.id === 'plans' && !isPremium && <span className="ml-auto text-[9px] font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-1.5 py-0.5 rounded-full">Nouveau</span>}
+            {item.id === 'plans' && !isPremium && <span className="ml-auto text-[9px] font-bold text-cyan-600 bg-cyan-50 dark:bg-cyan-900/20 px-1.5 py-0.5 rounded-full">Nouveau</span>}
           </button>
         );
       })}
@@ -108,7 +108,7 @@ export function AppLayout({ activeTab, onTabChange, children, user, userRole = '
             <Sprout className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-gray-900 dark:text-slate-50 text-sm">CalisteAgriTech</h1>
+            <h1 className="font-bold text-gray-900 dark:text-slate-50 text-sm">CherilleTech</h1>
             <p className="text-[10px] text-gray-400 dark:text-slate-500">Smart Farming Platform</p>
           </div>
           <button onClick={() => setSidebarOpen(false)} className="ml-auto lg:hidden p-1 text-gray-400 hover:text-gray-600 dark:hover:text-slate-300">
@@ -180,7 +180,7 @@ export function AppLayout({ activeTab, onTabChange, children, user, userRole = '
           </button>
           <div className="flex items-center gap-2">
             <Sprout className="w-5 h-5 text-primary-600" />
-            <span className="font-semibold text-sm text-gray-900 dark:text-slate-100">CalisteAgriTech</span>
+            <span className="font-semibold text-sm text-gray-900 dark:text-slate-100">CherilleTech</span>
           </div>
           <div className="ml-auto flex items-center gap-1">
             <NotificationsPanel />

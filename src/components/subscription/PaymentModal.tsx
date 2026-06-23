@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Smartphone, CreditCard, Check, Loader2, AlertCircle, ArrowLeft, Lock, ShieldCheck } from 'lucide-react';
 import type { Plan, PlanId } from '../../hooks/useSubscription';
@@ -51,8 +51,8 @@ function VerifyingScreen({ method, amount }: { method: PayMethod; amount: number
   return (
     <div className="text-center py-6 space-y-5">
       <div className="relative w-16 h-16 mx-auto">
-        <div className="absolute inset-0 rounded-full border-4 border-emerald-100 dark:border-emerald-900/30" />
-        <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-emerald-500 animate-spin" />
+        <div className="absolute inset-0 rounded-full border-4 border-cyan-100 dark:border-cyan-900/30" />
+        <div className="absolute inset-0 rounded-full border-4 border-transparent border-t-cyan-500 animate-spin" />
         <div className="absolute inset-2 rounded-full flex items-center justify-center">
           {method === 'orange' ? <OrangeLogo /> : method === 'mtn' ? <MTNLogo /> : <CreditCard className="w-6 h-6 text-blue-500" />}
         </div>
@@ -67,8 +67,8 @@ function VerifyingScreen({ method, amount }: { method: PayMethod; amount: number
         {VERIFY_STEPS.map((step, i) => (
           <div key={step} className={`flex items-center gap-2 text-sm transition-all ${i <= stepIdx ? 'opacity-100' : 'opacity-0'}`}>
             {i < stepIdx
-              ? <Check className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-              : <Loader2 className="w-4 h-4 text-emerald-500 animate-spin flex-shrink-0" />
+              ? <Check className="w-4 h-4 text-cyan-500 flex-shrink-0" />
+              : <Loader2 className="w-4 h-4 text-cyan-500 animate-spin flex-shrink-0" />
             }
             <span className={i < stepIdx ? 'text-gray-500 dark:text-slate-400 line-through' : 'text-gray-700 dark:text-slate-200 font-medium'}>
               {step}
@@ -152,7 +152,7 @@ export function PaymentModal({ plan, onClose, onSuccess }: PaymentModalProps) {
           transition={{ type: 'spring', damping: 25, stiffness: 300 }}
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-5 text-white">
+          <div className="bg-gradient-to-r from-cyan-600 to-blue-700 p-5 text-white">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-2">
                 {canGoBack && (
@@ -170,7 +170,7 @@ export function PaymentModal({ plan, onClose, onSuccess }: PaymentModalProps) {
               )}
             </div>
             <h2 className="text-xl font-bold">Souscrire au plan {plan.name}</h2>
-            <p className="text-emerald-100 text-sm mt-1">
+            <p className="text-cyan-100 text-sm mt-1">
               {plan.price.toLocaleString('fr-FR')} FCFA / mois • Résiliable à tout moment
             </p>
           </div>
@@ -217,7 +217,7 @@ export function PaymentModal({ plan, onClose, onSuccess }: PaymentModalProps) {
                     value={name}
                     onChange={e => setName(e.target.value)}
                     placeholder="Votre nom complet"
-                    className="w-full px-3 py-2.5 border border-gray-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2.5 border border-gray-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500"
                   />
                 </div>
                 <div>
@@ -231,7 +231,7 @@ export function PaymentModal({ plan, onClose, onSuccess }: PaymentModalProps) {
                       value={phone}
                       onChange={e => setPhone(e.target.value.replace(/\D/g, '').slice(0, 9))}
                       placeholder="6XXXXXXXX"
-                      className="flex-1 px-3 py-2.5 border border-gray-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="flex-1 px-3 py-2.5 border border-gray-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     />
                   </div>
                 </div>
@@ -239,7 +239,7 @@ export function PaymentModal({ plan, onClose, onSuccess }: PaymentModalProps) {
                 <button
                   onClick={handleMobileSubmit}
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 text-white font-semibold rounded-xl transition-colors"
+                  className="w-full flex items-center justify-center gap-2 py-3 bg-cyan-600 hover:bg-cyan-700 disabled:opacity-60 text-white font-semibold rounded-xl transition-colors"
                 >
                   {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Smartphone className="w-4 h-4" />}
                   {loading ? 'Vérification…' : `Payer ${plan.price.toLocaleString('fr-FR')} FCFA`}
@@ -257,7 +257,7 @@ export function PaymentModal({ plan, onClose, onSuccess }: PaymentModalProps) {
                     value={cardName}
                     onChange={e => setCardName(e.target.value)}
                     placeholder="Nom tel qu'il figure sur la carte"
-                    className="w-full px-3 py-2.5 border border-gray-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 uppercase"
+                    className="w-full px-3 py-2.5 border border-gray-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-cyan-500 uppercase"
                   />
                 </div>
                 <div>
@@ -268,7 +268,7 @@ export function PaymentModal({ plan, onClose, onSuccess }: PaymentModalProps) {
                       onChange={e => setCardNumber(formatCard(e.target.value))}
                       placeholder="0000 0000 0000 0000"
                       maxLength={19}
-                      className="w-full px-3 py-2.5 pr-10 border border-gray-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3 py-2.5 pr-10 border border-gray-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     />
                     <CreditCard className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
                   </div>
@@ -281,7 +281,7 @@ export function PaymentModal({ plan, onClose, onSuccess }: PaymentModalProps) {
                       onChange={e => setExpiry(formatExpiry(e.target.value))}
                       placeholder="MM/AA"
                       maxLength={5}
-                      className="w-full px-3 py-2.5 border border-gray-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3 py-2.5 border border-gray-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     />
                   </div>
                   <div>
@@ -292,19 +292,19 @@ export function PaymentModal({ plan, onClose, onSuccess }: PaymentModalProps) {
                       placeholder="123"
                       maxLength={3}
                       type="password"
-                      className="w-full px-3 py-2.5 border border-gray-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3 py-2.5 border border-gray-200 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-slate-100 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-cyan-500"
                     />
                   </div>
                 </div>
                 {error && <p className="flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400"><AlertCircle className="w-3.5 h-3.5" />{error}</p>}
                 <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-slate-500">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-500 flex-shrink-0" />
+                  <ShieldCheck className="w-3.5 h-3.5 text-cyan-500 flex-shrink-0" />
                   Paiement chiffré SSL — vos données ne sont pas stockées
                 </div>
                 <button
                   onClick={handleCardSubmit}
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2 py-3 bg-emerald-600 hover:bg-emerald-700 disabled:opacity-60 text-white font-semibold rounded-xl transition-colors"
+                  className="w-full flex items-center justify-center gap-2 py-3 bg-cyan-600 hover:bg-cyan-700 disabled:opacity-60 text-white font-semibold rounded-xl transition-colors"
                 >
                   {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Lock className="w-4 h-4" />}
                   {loading ? 'Vérification…' : `Payer ${plan.price.toLocaleString('fr-FR')} FCFA`}
@@ -320,12 +320,12 @@ export function PaymentModal({ plan, onClose, onSuccess }: PaymentModalProps) {
             {/* STEP: success */}
             {step === 'success' && (
               <motion.div className="text-center py-4 space-y-3" initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
-                <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto">
-                  <Check className="w-8 h-8 text-emerald-600 dark:text-emerald-400" />
+                <div className="w-16 h-16 bg-cyan-100 dark:bg-cyan-900/30 rounded-full flex items-center justify-center mx-auto">
+                  <Check className="w-8 h-8 text-cyan-600 dark:text-cyan-400" />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 dark:text-slate-100">Paiement validé !</h3>
                 <p className="text-gray-500 dark:text-slate-400 text-sm">
-                  Bienvenue dans le plan <strong className="text-emerald-600 dark:text-emerald-400">{plan.name}</strong>.<br />
+                  Bienvenue dans le plan <strong className="text-cyan-600 dark:text-cyan-400">{plan.name}</strong>.<br />
                   Toutes les fonctionnalités sont maintenant actives.
                 </p>
                 <div className="text-xs text-gray-400 dark:text-slate-500">Redirection en cours…</div>

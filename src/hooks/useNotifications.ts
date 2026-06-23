@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from "react";
+﻿import { useState, useEffect, useCallback, useRef } from "react";
 import type { Notification } from "../types/database";
 import { supabase } from "../lib/supabase";
 
@@ -19,7 +19,7 @@ function showBrowserNotif(titre: string, message: string, type: string) {
     alerte: '🚨', succes: '✅', avertissement: '⚠️', info: 'ℹ️',
   };
   try {
-    new Notification(`${icons[type] ?? 'ℹ️'} CalisteAgriTech`, {
+    new Notification(`${icons[type] ?? 'ℹ️'} CherilleTech`, {
       body: `${titre}\n${message}`,
       icon: '/favicon.ico',
       tag: `caliste-${Date.now()}`,

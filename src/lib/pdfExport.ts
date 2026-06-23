@@ -1,18 +1,18 @@
-import jsPDF from 'jspdf';
+﻿import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import type { Parcelle } from '../types/database';
 
 // ─── Brand colors ─────────────────────────────────────────────────────────────
 const BRAND = {
   green: [22, 163, 74] as [number, number, number],
-  teal: [13, 148, 136] as [number, number, number],
+  teal: [8, 145, 178] as [number, number, number],
   dark: [15, 23, 42] as [number, number, number],
   gray: [100, 116, 139] as [number, number, number],
   lightGray: [241, 245, 249] as [number, number, number],
   white: [255, 255, 255] as [number, number, number],
 };
 
-const SITE_NAME = 'CalisteAgriTech';
+const SITE_NAME = 'CherilleTech';
 const SITE_TAGLINE = 'Plateforme Smart Farm SaaS';
 
 function drawHeader(doc: jsPDF, title: string, subtitle?: string) {

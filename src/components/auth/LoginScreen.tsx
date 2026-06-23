@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { Sprout, Droplets, CloudSun, Cpu, AlertCircle, Loader2 } from 'lucide-react';
 
@@ -35,7 +35,7 @@ export function LoginScreen() {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl mb-6 border border-white/20">
             <Sprout className="w-10 h-10 text-primary-300" />
           </div>
-          <h1 className="text-4xl font-bold text-white tracking-tight">CalisteAgriTech</h1>
+          <h1 className="text-4xl font-bold text-white tracking-tight">CherilleTech</h1>
           <p className="text-primary-200 mt-2 text-lg">Smart Farming Dashboard</p>
         </div>
 
@@ -45,7 +45,7 @@ export function LoginScreen() {
             { icon: Droplets, label: 'Irrigation Auto', color: 'text-blue-300' },
             { icon: CloudSun, label: 'Météo en Direct', color: 'text-amber-300' },
             { icon: Cpu, label: 'IA Agronome', color: 'text-primary-300' },
-            { icon: Sprout, label: 'Calendrier IA', color: 'text-green-300' },
+            { icon: Sprout, label: 'Calendrier IA', color: 'text-cyan-300' },
           ].map((feature) => (
             <div
               key={feature.label}
@@ -90,7 +90,7 @@ export function LoginScreen() {
           </button>
 
           <p className="text-primary-300/60 text-xs mt-4 text-center">
-            En vous connectant, vous acceptez les conditions d'utilisation de CalisteAgriTech
+            En vous connectant, vous acceptez les conditions d'utilisation de CherilleTech
           </p>
         </div>
       </div>

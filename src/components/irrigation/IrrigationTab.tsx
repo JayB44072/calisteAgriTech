@@ -1,4 +1,4 @@
-import { useState } from 'react';
+﻿import { useState } from 'react';
 import { useParcelles } from '../../hooks/useParcelles';
 import { useSensorData } from '../../hooks/useSensorData';
 import { useLang } from '../../contexts/LanguageContext';
@@ -38,7 +38,7 @@ interface IrrigationSession {
 const statusConfig = {
   planifie: { label: 'Planifié', color: 'text-amber-600', bg: 'bg-amber-50 dark:bg-amber-900/20', icon: Clock },
   en_cours: { label: 'En cours', color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20', icon: Zap },
-  termine:  { label: 'Terminé',  color: 'text-green-600', bg: 'bg-green-50 dark:bg-green-900/20',  icon: CheckCircle },
+  termine:  { label: 'Terminé',  color: 'text-cyan-600', bg: 'bg-cyan-50 dark:bg-cyan-900/20',  icon: CheckCircle },
 };
 
 function ParcelleIrrigationStatus({ parcelle, onToggle, lang }: { parcelle: Parcelle; onToggle: () => void; lang: string }) {
@@ -57,7 +57,7 @@ function ParcelleIrrigationStatus({ parcelle, onToggle, lang }: { parcelle: Parc
           <div className="flex items-center gap-2 mt-0.5">
             <span className="text-xs text-gray-400 dark:text-slate-500">{parcelle.culture}</span>
             {humidite !== null && (
-              <span className={`text-xs font-medium ${humidite < 35 ? 'text-red-500' : humidite < 50 ? 'text-amber-500' : 'text-green-500'}`}>
+              <span className={`text-xs font-medium ${humidite < 35 ? 'text-red-500' : humidite < 50 ? 'text-amber-500' : 'text-cyan-500'}`}>
                 Sol: {humidite.toFixed(0)}%
               </span>
             )}
@@ -248,7 +248,7 @@ export function IrrigationTab({ userId }: { userId: string }) {
           { label: 'Irrigations actives', value: activeCount, icon: Power, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20' },
           { label: 'Plans créés', value: plans.length, icon: Calendar, color: 'text-amber-600', bg: 'bg-amber-50 dark:bg-amber-900/20' },
           { label: 'Volume total', value: `${totalVolume}L`, icon: Droplets, color: 'text-primary-600', bg: 'bg-primary-50 dark:bg-primary-900/20' },
-          { label: 'Sessions', value: sessions.length, icon: BarChart2, color: 'text-green-600', bg: 'bg-green-50 dark:bg-green-900/20' },
+          { label: 'Sessions', value: sessions.length, icon: BarChart2, color: 'text-cyan-600', bg: 'bg-cyan-50 dark:bg-cyan-900/20' },
         ].map((kpi, i) => (
           <motion.div key={kpi.label} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}
             className={`${kpi.bg} rounded-xl p-4`}>
@@ -383,7 +383,7 @@ export function IrrigationTab({ userId }: { userId: string }) {
                       {new Date(sess.date).toLocaleDateString('fr-FR', { day: '2-digit', month: 'long', hour: '2-digit', minute: '2-digit' })} — {sess.duration_min} min — {sess.volume}L
                     </p>
                   </div>
-                  <span className="text-xs font-medium text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <span className="text-xs font-medium text-cyan-600 dark:text-cyan-400 bg-cyan-50 dark:bg-cyan-900/20 px-2 py-0.5 rounded-full flex items-center gap-1">
                     <CheckCircle className="w-3 h-3" /> Planifié
                   </span>
                 </div>
