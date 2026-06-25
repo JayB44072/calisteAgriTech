@@ -2,6 +2,14 @@
   "version": "0.0.1",
   "configurations": [
     {
+      "name": "TuteurIA — Dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 5173,
+      "autoPort": true,
+      "cwd": "C:\\Users\\WhiteDuck\\Desktop\\projets\\tuteurIA"
+    },
+    {
       "name": "CalisteAgriTech — Dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
@@ -14,6 +22,14 @@
       "runtimeArgs": ["run", "preview"],
       "port": 4173,
       "autoPort": true
+    },
+    {
+      "name": "TaffExpress — Dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "port": 3000,
+      "autoPort": true,
+      "cwd": "C:\\Users\\WhiteDuck\\Desktop\\taffExpress\\taffgoBackend\\web"
     }
   ]
 }
