@@ -63,7 +63,7 @@ export function Header({ user, onLogin, onRegister, onDashboard, onLogout, scrol
               <Sprout className="w-5 h-5 text-white" />
             </div>
             <span className="font-bold text-slate-900 dark:text-slate-50 text-lg tracking-tight">
-              Cherille<span className="text-primary-600 dark:text-primary-400">Tech</span>
+              Agri<span className="text-primary-600 dark:text-primary-400">Tech</span>
             </span>
           </motion.div>
 

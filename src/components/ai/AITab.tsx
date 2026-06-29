@@ -68,7 +68,7 @@ function ChatBot({ userId }: { userId: string }) {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       role: 'assistant',
-      content: 'Bonjour ! Je suis CherilleTechIA, votre assistant agronome. Posez-moi vos questions sur vos cultures, l\'irrigation, les maladies ou les pratiques agricoles au Cameroun.',
+      content: 'Bonjour ! Je suis AgriTechIA, votre assistant agronome. Posez-moi vos questions sur vos cultures, l\'irrigation, les maladies ou les pratiques agricoles au Cameroun.',
       timestamp: new Date(),
     },
   ]);

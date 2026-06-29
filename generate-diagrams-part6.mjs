@@ -41,7 +41,7 @@ const login = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fo
   <text x="260" y="200" text-anchor="middle" font-size="60">🌾</text>
   <text x="260" y="270" text-anchor="middle" fill="white" font-size="30" font-weight="900">CalisteAgriTech</text>
   <text x="260" y="305" text-anchor="middle" fill="${C3}" font-size="16">Plateforme Smart Farming</text>
-  <text x="260" y="340" text-anchor="middle" fill="#94a3b8" font-size="14">by CherilleTech · Cameroun</text>
+  <text x="260" y="340" text-anchor="middle" fill="#94a3b8" font-size="14">by AgriTech · Cameroun</text>
 
   <!-- Features list -->
   ${['🌡️  Capteurs IoT temps réel','💧  Irrigation automatique','🤖  IA Advisor (Gemini)','🗺️  Carte interactive','📊  Tableaux de bord'].map((f,i)=>`
@@ -49,7 +49,7 @@ const login = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fo
     <text x="120" y="${417+i*52}" fill="white" font-size="14">${f}</text>
   `).join('')}
 
-  <text x="260" y="690" text-anchor="middle" fill="#475569" font-size="12">© 2025 CherilleTech · Yaoundé, Cameroun</text>
+  <text x="260" y="690" text-anchor="middle" fill="#475569" font-size="12">© 2025 AgriTech · Yaoundé, Cameroun</text>
 
   <!-- Right panel: login form -->
   <rect x="580" y="120" width="540" height="540" rx="20" fill="white" filter="url(#sh)"/>

@@ -26,7 +26,7 @@ export function Footer() {
               <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
                 <Sprout className="w-4 h-4 text-white" />
               </div>
-              <span className="font-bold text-white text-lg">CherilleTech</span>
+              <span className="font-bold text-white text-lg">AgriTech</span>
             </div>
             <p className="text-sm text-slate-400 leading-relaxed mb-4">{t('footer.brand.desc')}</p>
             <div className="flex items-center gap-3">
@@ -97,7 +97,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="mt-12 pt-8 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-slate-500">
-            &copy; {new Date().getFullYear()} CherilleTech. {t('footer.rights')}
+            &copy; {new Date().getFullYear()} AgriTech. {t('footer.rights')}
           </p>
           <p className="text-xs text-slate-600">Agriculture intelligente · Cameroun 🌱</p>
         </div>

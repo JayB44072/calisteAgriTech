@@ -1207,7 +1207,7 @@ const landing = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 860" 
   <rect x="20" y="18" width="30" height="30" rx="8" fill="url(#btn)"/>
   <text x="25" y="38" fill="white" font-size="18">🌾</text>
   <text x="60" y="38" fill="${DARK}" font-size="18" font-weight="800">CalisteAgriTech</text>
-  <text x="310" y="38" fill="${GRAY}" font-size="13">· by CherilleTech</text>
+  <text x="310" y="38" fill="${GRAY}" font-size="13">· by AgriTech</text>
   ${[['Accueil', 520], ['Fonctionnalités', 640], ['Tarifs', 790], ['À propos', 910]].map(([label, x]) => `
     <text x="${x}" y="38" fill="${GRAY}" font-size="14">${label}</text>
   `).join('')}
@@ -1220,7 +1220,7 @@ const landing = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 860" 
   <!-- Badge -->
   <rect x="90" y="100" width="320" height="34" rx="17" fill="#ecfeff" stroke="${C1}" stroke-width="1.5"/>
   <text x="105" y="122" fill="${C1}" font-size="12">🌊</text>
-  <text x="125" y="122" fill="${C2}" font-size="13" font-weight="600">Plateforme Smart Farm · CherilleTech</text>
+  <text x="125" y="122" fill="${C2}" font-size="13" font-weight="600">Plateforme Smart Farm · AgriTech</text>
 
   <!-- Headline -->
   <text x="90" y="180" fill="${DARK}" font-size="54" font-weight="900">Agriculture</text>
@@ -1311,7 +1311,7 @@ const landing = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 860" 
 
   <!-- Footer bar -->
   <rect y="830" width="1400" height="30" fill="url(#hdr)"/>
-  <text x="700" y="849" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12">© 2025 CalisteAgriTech · CherilleTech · Yaoundé, Cameroun · contact@calisteagritech.cm</text>
+  <text x="700" y="849" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="12">© 2025 CalisteAgriTech · AgriTech · Yaoundé, Cameroun · contact@calisteagritech.cm</text>
 </svg>`;
 
 toPng(landing, '08_maquette_landing_page.png');

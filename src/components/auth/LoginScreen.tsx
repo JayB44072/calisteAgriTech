@@ -35,7 +35,7 @@ export function LoginScreen() {
           <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl mb-6 border border-white/20">
             <Sprout className="w-10 h-10 text-primary-300" />
           </div>
-          <h1 className="text-4xl font-bold text-white tracking-tight">CherilleTech</h1>
+          <h1 className="text-4xl font-bold text-white tracking-tight">AgriTech</h1>
           <p className="text-primary-200 mt-2 text-lg">Smart Farming Dashboard</p>
         </div>
 
@@ -90,7 +90,7 @@ export function LoginScreen() {
           </button>
 
           <p className="text-primary-300/60 text-xs mt-4 text-center">
-            En vous connectant, vous acceptez les conditions d'utilisation de CherilleTech
+            En vous connectant, vous acceptez les conditions d'utilisation de AgriTech
           </p>
         </div>
       </div>

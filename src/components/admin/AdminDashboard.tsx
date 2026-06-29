@@ -463,7 +463,7 @@ function UsersPanel() {
     await supabase.from('notifications').insert({
       user_id: userId,
       titre: 'Compte supprimé',
-      message: 'Votre compte CherilleTech a été supprimé par l\'administrateur. Contactez le support si c\'est une erreur.',
+      message: 'Votre compte AgriTech a été supprimé par l\'administrateur. Contactez le support si c\'est une erreur.',
       type: 'alerte',
     });
 

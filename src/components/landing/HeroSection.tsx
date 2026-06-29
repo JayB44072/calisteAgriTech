@@ -156,7 +156,7 @@ function DashboardCard() {
           <div className="w-6 h-6 bg-white/20 rounded-lg flex items-center justify-center">
             <Sprout className="w-3.5 h-3.5 text-white" />
           </div>
-          <span className="text-white font-semibold text-sm">CherilleTech</span>
+          <span className="text-white font-semibold text-sm">AgriTech</span>
         </div>
         <div className="flex items-center gap-1.5">
           <motion.span animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 1.5, repeat: Infinity }}
@@ -304,7 +304,7 @@ export function HeroSection({ onRegister, onDemo }: HeroSectionProps) {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 bg-cyan-50 dark:bg-cyan-900/30 border border-cyan-200 dark:border-cyan-700/40 text-cyan-700 dark:text-cyan-300 px-4 py-1.5 rounded-full text-xs font-medium mb-6">
             <motion.span animate={{ rotate: [0, 15, -15, 0] }} transition={{ duration: 2, repeat: Infinity, delay: 1 }}>🌊</motion.span>
-            Plateforme Smart Farm · CherilleTech
+            Plateforme Smart Farm · AgriTech
           </motion.div>
 
           <div className="text-5xl sm:text-6xl font-bold text-slate-900 dark:text-white leading-tight tracking-tight mb-6">
