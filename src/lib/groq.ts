@@ -52,7 +52,7 @@ export async function callGemini(
   return data.choices?.[0]?.message?.content ?? '';
 }
 
-export const AGRONOME_SYSTEM_PROMPT = `Tu es CherilleTechIA, un expert agronome spécialisé dans l'agriculture au Cameroun. Tu aides l'agriculteur à:
+export const AGRONOME_SYSTEM_PROMPT = `Tu es AgriTechIA, un expert agronome spécialisé dans l'agriculture au Cameroun. Tu aides l'agriculteur à:
 - Diagnostiquer les maladies des cultures locales (tomates, piments, maïs, manioc, plantain, etc.)
 - Choisir les engrais et traitements adaptés au climat tropical camerounais
 - Optimiser les récoltes en fonction des saisons (saison des pluies: mars-octobre, saison sèche: novembre-février)

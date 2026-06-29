@@ -108,7 +108,7 @@ export function AppLayout({ activeTab, onTabChange, children, user, userRole = '
             <Sprout className="w-5 h-5 text-white" />
           </div>
           <div>
-            <h1 className="font-bold text-gray-900 dark:text-slate-50 text-sm">CherilleTech</h1>
+            <h1 className="font-bold text-gray-900 dark:text-slate-50 text-sm">AgriTech</h1>
             <p className="text-[10px] text-gray-400 dark:text-slate-500">Smart Farming Platform</p>
           </div>
           <button onClick={() => setSidebarOpen(false)} className="ml-auto lg:hidden p-1 text-gray-400 hover:text-gray-600 dark:hover:text-slate-300">
@@ -180,7 +180,7 @@ export function AppLayout({ activeTab, onTabChange, children, user, userRole = '
           </button>
           <div className="flex items-center gap-2">
             <Sprout className="w-5 h-5 text-primary-600" />
-            <span className="font-semibold text-sm text-gray-900 dark:text-slate-100">CherilleTech</span>
+            <span className="font-semibold text-sm text-gray-900 dark:text-slate-100">AgriTech</span>
           </div>
           <div className="ml-auto flex items-center gap-1">
             <NotificationsPanel />

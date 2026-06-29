@@ -19,7 +19,7 @@ function showBrowserNotif(titre: string, message: string, type: string) {
     alerte: '🚨', succes: '✅', avertissement: '⚠️', info: 'ℹ️',
   };
   try {
-    new Notification(`${icons[type] ?? 'ℹ️'} CherilleTech`, {
+    new Notification(`${icons[type] ?? 'ℹ️'} AgriTech`, {
       body: `${titre}\n${message}`,
       icon: '/favicon.ico',
       tag: `caliste-${Date.now()}`,

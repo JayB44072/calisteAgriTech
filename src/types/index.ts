@@ -1,5 +1,5 @@
 ﻿// src/types/index.ts
-// Entités de données complètes - CherilleTech Smart Farm
+// Entités de données complètes - AgriTech Smart Farm
 
 // ─── Rôles & Utilisateur ────────────────────────────────────────────────────
 

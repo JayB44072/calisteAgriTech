@@ -12,7 +12,7 @@ const BRAND = {
   white: [255, 255, 255] as [number, number, number],
 };
 
-const SITE_NAME = 'CherilleTech';
+const SITE_NAME = 'AgriTech';
 const SITE_TAGLINE = 'Plateforme Smart Farm SaaS';
 
 function drawHeader(doc: jsPDF, title: string, subtitle?: string) {
