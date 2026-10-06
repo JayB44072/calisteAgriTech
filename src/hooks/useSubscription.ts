@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+﻿import { useState, useEffect, useCallback } from 'react';
 
 export type PlanId = 'gratuit' | 'pro' | 'cooperatif';
 
@@ -65,9 +65,9 @@ export const PLANS: Record<PlanId, Plan> = {
     id: 'cooperatif',
     name: 'Coopérative',
     price: 24900,
-    color: 'text-emerald-600',
+    color: 'text-cyan-600',
     badge: 'Coopérative',
-    badgeColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
+    badgeColor: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-300',
     limits: {
       parcelles: -1,
       aiRequests: -1,

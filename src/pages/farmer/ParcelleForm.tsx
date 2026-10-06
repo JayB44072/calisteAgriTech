@@ -1,4 +1,4 @@
-// src/pages/farmer/ParcelleForm.tsx
+﻿// src/pages/farmer/ParcelleForm.tsx
 // Formulaire pour créer ou modifier une parcelle avec validation
 
 import { useState, useEffect } from "react";
@@ -121,7 +121,7 @@ export default function ParcelleForm() {
         value={form[name]}
         onChange={(e) => setForm((f) => ({ ...f, [name]: e.target.value }))}
         placeholder={placeholder}
-        className={`w-full px-4 py-3 rounded-xl border text-sm transition-colors outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 ${
+        className={`w-full px-4 py-3 rounded-xl border text-sm transition-colors outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 ${
           errors[name] ? "border-red-400 bg-red-50" : "border-gray-200 bg-white hover:border-gray-300"
         }`}
       />
@@ -153,7 +153,7 @@ export default function ParcelleForm() {
         {/* Informations générales */}
         <div className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6 space-y-4">
           <h2 className="font-semibold text-gray-800 flex items-center gap-2">
-            <Leaf className="w-4 h-4 text-emerald-500" /> Informations générales
+            <Leaf className="w-4 h-4 text-cyan-500" /> Informations générales
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Field label="Nom de la parcelle" name="nom" placeholder="Ex: Champ Nord - Maïs" required />
@@ -166,7 +166,7 @@ export default function ParcelleForm() {
               <select
                 value={form.type_sol}
                 onChange={(e) => setForm((f) => ({ ...f, type_sol: e.target.value as SolType }))}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 bg-white"
               >
                 {SOL_TYPES.map((s) => <option key={s.value} value={s.value}>{s.label}</option>)}
               </select>
@@ -176,7 +176,7 @@ export default function ParcelleForm() {
               <select
                 value={form.status}
                 onChange={(e) => setForm((f) => ({ ...f, status: e.target.value as ParcelleStatus }))}
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white"
+                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 bg-white"
               >
                 {STATUSES.map((s) => <option key={s.value} value={s.value}>{s.label}</option>)}
               </select>
@@ -189,7 +189,7 @@ export default function ParcelleForm() {
               onChange={(e) => setForm((f) => ({ ...f, description: e.target.value }))}
               placeholder="Notes sur la parcelle, historique, particularités..."
               rows={3}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 bg-white resize-none"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm outline-none focus:ring-2 focus:ring-cyan-500/20 focus:border-cyan-500 bg-white resize-none"
             />
           </div>
         </div>
@@ -219,7 +219,7 @@ export default function ParcelleForm() {
           <button
             type="submit"
             disabled={saving}
-            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-medium transition-all duration-200 disabled:opacity-50 active:scale-95 shadow-sm"
+            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white text-sm font-medium transition-all duration-200 disabled:opacity-50 active:scale-95 shadow-sm"
           >
             <Save className="w-4 h-4" />
             {saving ? "Enregistrement…" : isEdit ? "Enregistrer" : "Créer la parcelle"}

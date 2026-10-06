@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "TaffExpress — Dev",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "C:/Users/WhiteDuck/Desktop/taffExpress/taffgoBackend/web"],
+      "port": 3000
+    },
+    {
+      "name": "calisteAgriTech",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "C:/Users/WhiteDuck/Desktop/projets/calisteAgriTech", "--", "--port", "5174"],
+      "port": 5174
+    }
+  ]
+}

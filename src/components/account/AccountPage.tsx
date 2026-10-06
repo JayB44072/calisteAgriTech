@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+﻿import { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../../hooks/useAuth';
 import { useProfile } from '../../hooks/useProfile';
 import { useParcelles } from '../../hooks/useParcelles';
@@ -15,7 +15,7 @@ import {
 import { PageBackground } from '../ui/PageBackground';
 
 const ROLE_LABELS: Record<string, { fr: string; color: string; bg: string; icon: any }> = {
-  agriculteur: { fr: 'Agriculteur', color: 'text-emerald-700 dark:text-emerald-400', bg: 'bg-emerald-50 dark:bg-emerald-900/30', icon: Sprout },
+  agriculteur: { fr: 'Agriculteur', color: 'text-cyan-700 dark:text-cyan-400', bg: 'bg-cyan-50 dark:bg-cyan-900/30', icon: Sprout },
   gestionnaire: { fr: 'Gestionnaire', color: 'text-blue-700 dark:text-blue-400', bg: 'bg-blue-50 dark:bg-blue-900/30', icon: Building2 },
   fournisseur: { fr: 'Fournisseur', color: 'text-purple-700 dark:text-purple-400', bg: 'bg-purple-50 dark:bg-purple-900/30', icon: Star },
   admin: { fr: 'Administrateur', color: 'text-red-700 dark:text-red-400', bg: 'bg-red-50 dark:bg-red-900/30', icon: Shield },
@@ -169,7 +169,7 @@ export function AccountPage() {
       <motion.div
         initial={{ opacity: 0, y: -10 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 rounded-3xl p-8 text-white overflow-hidden shadow-xl shadow-emerald-600/20"
+        className="relative bg-gradient-to-r from-cyan-600 via-green-600 to-blue-700 rounded-3xl p-8 text-white overflow-hidden shadow-xl shadow-cyan-600/20"
       >
         <div className="absolute inset-0 opacity-10">
           <svg width="100%" height="100%"><pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1.5" fill="white" /></pattern><rect width="100%" height="100%" fill="url(#dots)" /></svg>
@@ -190,7 +190,7 @@ export function AccountPage() {
             <button
               onClick={() => fileInputRef.current?.click()}
               disabled={uploading}
-              className="absolute -bottom-2 -right-2 w-8 h-8 bg-white text-emerald-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all hover:scale-110 active:scale-95"
+              className="absolute -bottom-2 -right-2 w-8 h-8 bg-white text-cyan-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all hover:scale-110 active:scale-95"
             >
               {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Camera className="w-4 h-4" />}
             </button>
@@ -227,7 +227,7 @@ export function AccountPage() {
       <AnimatePresence>
         {success && (
           <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-            className="flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/50 rounded-xl px-4 py-3 text-sm">
+            className="flex items-center gap-2 bg-cyan-50 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-400 border border-cyan-200 dark:border-cyan-800/50 rounded-xl px-4 py-3 text-sm">
             <CheckCircle className="w-4 h-4" /> Profil mis à jour avec succès !
           </motion.div>
         )}
@@ -236,7 +236,7 @@ export function AccountPage() {
       {/* Stats grid */}
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
         className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={Sprout} label="Parcelles actives" value={parcelles.length} color="bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400" />
+        <StatCard icon={Sprout} label="Parcelles actives" value={parcelles.length} color="bg-cyan-50 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400" />
         <StatCard icon={Ruler} label="Surface totale" value={`${totalSuperficie.toFixed(1)} ha`} color="bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400" />
         <StatCard icon={Droplets} label="Irrigation active" value={activeIrrigation} color="bg-cyan-50 dark:bg-cyan-900/30 text-cyan-600 dark:text-cyan-400" />
         <StatCard icon={Cpu} label="Diagnostics IA" value={aiDiagnoses} color="bg-purple-50 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400" />
@@ -303,9 +303,9 @@ export function AccountPage() {
         <h3 className="font-semibold text-gray-900 dark:text-white flex items-center gap-2 text-sm mb-4">
           <Activity className="w-4 h-4 text-gray-400" /> Résumé d'activité
         </h3>
-        <div className="flex items-start gap-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-xl p-4 border border-emerald-100 dark:border-emerald-800/30">
-          <div className="w-10 h-10 bg-emerald-100 dark:bg-emerald-900/40 rounded-xl flex items-center justify-center flex-shrink-0">
-            <Award className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+        <div className="flex items-start gap-4 bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-xl p-4 border border-cyan-100 dark:border-cyan-800/30">
+          <div className="w-10 h-10 bg-cyan-100 dark:bg-cyan-900/40 rounded-xl flex items-center justify-center flex-shrink-0">
+            <Award className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
           </div>
           <div>
             <p className="text-sm font-medium text-gray-900 dark:text-white mb-1">Membre actif</p>
@@ -363,7 +363,7 @@ export function AccountPage() {
                       value={form[key as keyof typeof form]}
                       onChange={e => setForm(p => ({ ...p, [key]: e.target.value }))}
                       placeholder={placeholder}
-                      className="w-full border border-gray-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all"
+                      className="w-full border border-gray-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-cyan-500/30 focus:border-cyan-500 transition-all"
                     />
                   </div>
                 ))}
@@ -371,7 +371,7 @@ export function AccountPage() {
                 <div>
                   <label className="block text-xs font-semibold text-gray-600 dark:text-slate-400 mb-1.5">Culture principale</label>
                   <select value={form.primary_crop} onChange={e => setForm(p => ({ ...p, primary_crop: e.target.value }))}
-                    className="w-full border border-gray-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30">
+                    className="w-full border border-gray-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-cyan-500/30">
                     <option value="">— Sélectionner —</option>
                     {CULTURES.map(c => <option key={c} value={c}>{c}</option>)}
                   </select>
@@ -380,7 +380,7 @@ export function AccountPage() {
                 <div>
                   <label className="block text-xs font-semibold text-gray-600 dark:text-slate-400 mb-1.5">Rôle</label>
                   <select value={form.role} onChange={e => setForm(p => ({ ...p, role: e.target.value as UserRole }))}
-                    className="w-full border border-gray-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30">
+                    className="w-full border border-gray-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm bg-gray-50 dark:bg-slate-800 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-cyan-500/30">
                     {Object.entries(ROLES).map(([key, val]) => <option key={key} value={key}>{lang === 'fr' ? val.label : val.labelEn}</option>)}
                   </select>
                 </div>
@@ -390,7 +390,7 @@ export function AccountPage() {
                 <button
                   onClick={handleSave}
                   disabled={saving}
-                  className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white py-3 rounded-xl text-sm font-semibold transition-all disabled:opacity-50 shadow-lg shadow-emerald-600/20"
+                  className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-700 text-white py-3 rounded-xl text-sm font-semibold transition-all disabled:opacity-50 shadow-lg shadow-cyan-600/20"
                 >
                   {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                   {saving ? 'Enregistrement...' : 'Sauvegarder'}

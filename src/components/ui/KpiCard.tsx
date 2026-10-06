@@ -1,4 +1,4 @@
-// src/components/ui/KpiCard.tsx
+﻿// src/components/ui/KpiCard.tsx
 
 import { ReactNode } from "react";
 import { cardHover } from "../../lib/animations";
@@ -15,16 +15,16 @@ interface KpiCardProps {
 }
 
 const colorMap = {
-  green: "bg-green-50 text-green-600 border-green-100",
-  emerald: "bg-emerald-50 text-emerald-600 border-emerald-100",
+  green: "bg-cyan-50 text-cyan-600 border-cyan-100",
+  emerald: "bg-cyan-50 text-cyan-600 border-cyan-100",
   blue: "bg-blue-50 text-blue-600 border-blue-100",
   amber: "bg-amber-50 text-amber-600 border-amber-100",
   red: "bg-red-50 text-red-600 border-red-100",
 };
 
 const iconBg = {
-  green: "bg-green-100 text-green-600",
-  emerald: "bg-emerald-100 text-emerald-600",
+  green: "bg-cyan-100 text-cyan-600",
+  emerald: "bg-cyan-100 text-cyan-600",
   blue: "bg-blue-100 text-blue-600",
   amber: "bg-amber-100 text-amber-600",
   red: "bg-red-100 text-red-600",
@@ -60,7 +60,7 @@ export function KpiCard({
           {trend && (
             <p
               className={`mt-1 text-xs font-medium ${
-                trend.value >= 0 ? "text-green-600" : "text-red-500"
+                trend.value >= 0 ? "text-cyan-600" : "text-red-500"
               }`}
             >
               {trend.value >= 0 ? "↑" : "↓"} {Math.abs(trend.value)}% {trend.label}

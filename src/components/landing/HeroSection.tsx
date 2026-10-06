@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+﻿import { useEffect, useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { useLang } from '../../contexts/LanguageContext';
 import { Droplets, Thermometer, Cpu, Sprout, Wifi, BarChart3, ArrowRight, Play } from 'lucide-react';
@@ -110,7 +110,7 @@ function DashboardCard() {
   const kpis = [
     { label: 'Humidité sol', value: '72%', colorClass: 'text-blue-500', bgClass: 'bg-blue-50 dark:bg-blue-900/20', Icon: Droplets },
     { label: 'Température', value: '28°C', colorClass: 'text-red-500', bgClass: 'bg-red-50 dark:bg-red-900/20', Icon: Thermometer },
-    { label: 'Capteurs actifs', value: '12', colorClass: 'text-emerald-500', bgClass: 'bg-emerald-50 dark:bg-emerald-900/20', Icon: Wifi },
+    { label: 'Capteurs actifs', value: '12', colorClass: 'text-cyan-500', bgClass: 'bg-cyan-50 dark:bg-cyan-900/20', Icon: Wifi },
     { label: 'IA diagnostics', value: '3', colorClass: 'text-purple-500', bgClass: 'bg-purple-50 dark:bg-purple-900/20', Icon: Cpu },
   ];
   const bars = [65, 80, 55, 90, 70, 85, 60];
@@ -127,17 +127,17 @@ function DashboardCard() {
       className="relative bg-white dark:bg-slate-800 rounded-2xl shadow-2xl border border-gray-100 dark:border-slate-700 overflow-hidden cursor-none select-none"
     >
       {/* Header */}
-      <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-4 flex items-center justify-between">
+      <div className="bg-gradient-to-r from-cyan-600 to-blue-700 p-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="w-6 h-6 bg-white/20 rounded-lg flex items-center justify-center">
             <Sprout className="w-3.5 h-3.5 text-white" />
           </div>
-          <span className="text-white font-semibold text-sm">CalisteAgriTech</span>
+          <span className="text-white font-semibold text-sm">AgriTech</span>
         </div>
         <div className="flex items-center gap-1.5">
           <motion.span animate={{ opacity: [0.5, 1, 0.5] }} transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1.5 h-1.5 bg-emerald-300 rounded-full block" />
-          <span className="text-emerald-200 text-xs">En direct</span>
+            className="w-1.5 h-1.5 bg-cyan-300 rounded-full block" />
+          <span className="text-cyan-200 text-xs">En direct</span>
         </div>
       </div>
 
@@ -168,7 +168,7 @@ function DashboardCard() {
               animate={{ scaleY: 1 }}
               transition={{ delay: 0.9 + i * 0.07, duration: 0.4, ease: 'easeOut' }}
               style={{ height: `${h}%`, transformOrigin: 'bottom' }}
-              className="flex-1 bg-gradient-to-t from-emerald-500 to-teal-400 rounded-sm opacity-80"
+              className="flex-1 bg-gradient-to-t from-cyan-500 to-blue-400 rounded-sm opacity-80"
             />
           ))}
         </div>
@@ -179,7 +179,7 @@ function DashboardCard() {
         {[{ nom: 'Parcelle Nord', culture: 'Tomates', pct: 72 }, { nom: 'Parcelle Sud', culture: 'Maïs', pct: 58 }].map((p, i) => (
           <motion.div key={p.nom} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.1 + i * 0.1 }}
             className="flex items-center gap-3 bg-gray-50 dark:bg-slate-700/50 rounded-lg px-3 py-2">
-            <div className="w-2 h-2 rounded-full bg-emerald-500 flex-shrink-0" />
+            <div className="w-2 h-2 rounded-full bg-cyan-500 flex-shrink-0" />
             <div className="flex-1 min-w-0">
               <p className="text-xs font-medium text-gray-800 dark:text-slate-200 truncate">{p.nom}</p>
               <p className="text-[10px] text-gray-400">{p.culture}</p>
@@ -187,9 +187,9 @@ function DashboardCard() {
             <div className="w-12 bg-gray-200 dark:bg-slate-600 rounded-full h-1.5 overflow-hidden">
               <motion.div initial={{ width: 0 }} animate={{ width: `${p.pct}%` }}
                 transition={{ delay: 1.3 + i * 0.1, duration: 0.6 }}
-                className="h-full bg-emerald-500 rounded-full" />
+                className="h-full bg-cyan-500 rounded-full" />
             </div>
-            <span className="text-[10px] font-bold text-emerald-600">{p.pct}%</span>
+            <span className="text-[10px] font-bold text-cyan-600">{p.pct}%</span>
           </motion.div>
         ))}
       </div>
@@ -228,20 +228,20 @@ export function HeroSection({ onRegister, onDemo }: HeroSectionProps) {
   const { t } = useLang();
 
   const particles = [
-    { x: '8%',  y: '20%', size: 6, delay: 0,   color: '#16a34a' },
-    { x: '15%', y: '70%', size: 4, delay: 1.2, color: '#0d9488' },
-    { x: '25%', y: '40%', size: 8, delay: 0.5, color: '#22c55e' },
-    { x: '75%', y: '15%', size: 5, delay: 0.8, color: '#14b8a6' },
-    { x: '85%', y: '60%', size: 7, delay: 1.5, color: '#16a34a' },
-    { x: '90%', y: '30%', size: 4, delay: 0.3, color: '#0d9488' },
-    { x: '60%', y: '80%', size: 6, delay: 2,   color: '#22c55e' },
-    { x: '40%', y: '10%', size: 5, delay: 1,   color: '#14b8a6' },
-    { x: '5%',  y: '50%', size: 3, delay: 1.8, color: '#16a34a' },
-    { x: '95%', y: '75%', size: 4, delay: 0.7, color: '#22c55e' },
+    { x: '8%',  y: '20%', size: 6, delay: 0,   color: '#0891b2' },
+    { x: '15%', y: '70%', size: 4, delay: 1.2, color: '#0e7490' },
+    { x: '25%', y: '40%', size: 8, delay: 0.5, color: '#06b6d4' },
+    { x: '75%', y: '15%', size: 5, delay: 0.8, color: '#22d3ee' },
+    { x: '85%', y: '60%', size: 7, delay: 1.5, color: '#0891b2' },
+    { x: '90%', y: '30%', size: 4, delay: 0.3, color: '#0e7490' },
+    { x: '60%', y: '80%', size: 6, delay: 2,   color: '#06b6d4' },
+    { x: '40%', y: '10%', size: 5, delay: 1,   color: '#22d3ee' },
+    { x: '5%',  y: '50%', size: 3, delay: 1.8, color: '#0891b2' },
+    { x: '95%', y: '75%', size: 4, delay: 0.7, color: '#06b6d4' },
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-gradient-to-b from-white via-emerald-50/30 to-white dark:from-slate-900 dark:via-emerald-950/20 dark:to-slate-900">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16 bg-gradient-to-b from-white via-cyan-50/30 to-white dark:from-slate-900 dark:via-cyan-950/20 dark:to-slate-900">
 
       <CursorSpotlight />
 
@@ -254,13 +254,13 @@ export function HeroSection({ onRegister, onDemo }: HeroSectionProps) {
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div animate={{ x: [0, 40, 0], y: [0, -30, 0], scale: [1, 1.1, 1] }}
           transition={{ duration: 22, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute -top-40 -left-40 w-[700px] h-[700px] bg-emerald-200/20 dark:bg-emerald-500/5 rounded-full blur-3xl" />
+          className="absolute -top-40 -left-40 w-[700px] h-[700px] bg-cyan-200/20 dark:bg-cyan-500/5 rounded-full blur-3xl" />
         <motion.div animate={{ x: [0, -30, 0], y: [0, 40, 0], scale: [1, 1.08, 1] }}
           transition={{ duration: 28, repeat: Infinity, ease: 'easeInOut' }}
-          className="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-teal-200/20 dark:bg-teal-500/5 rounded-full blur-3xl" />
+          className="absolute -bottom-40 -right-40 w-[600px] h-[600px] bg-blue-200/20 dark:bg-blue-500/5 rounded-full blur-3xl" />
         {/* Grid */}
         <div className="absolute inset-0 opacity-[0.025] dark:opacity-[0.04]"
-          style={{ backgroundImage: 'linear-gradient(#16a34a 1px, transparent 1px), linear-gradient(90deg, #16a34a 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
+          style={{ backgroundImage: 'linear-gradient(#0891b2 1px, transparent 1px), linear-gradient(90deg, #0891b2 1px, transparent 1px)', backgroundSize: '60px 60px' }} />
       </div>
 
       {/* Content */}
@@ -270,7 +270,7 @@ export function HeroSection({ onRegister, onDemo }: HeroSectionProps) {
         <div>
           {/* Badge */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-700/40 text-emerald-700 dark:text-emerald-300 px-4 py-1.5 rounded-full text-xs font-medium mb-6">
+            className="inline-flex items-center gap-2 bg-cyan-50 dark:bg-cyan-900/30 border border-cyan-200 dark:border-cyan-700/40 text-cyan-700 dark:text-cyan-300 px-4 py-1.5 rounded-full text-xs font-medium mb-6">
             <motion.span animate={{ scale: [1, 1.4, 1] }} transition={{ duration: 2, repeat: Infinity }}>🌱</motion.span>
             Plateforme Smart Farm — Cameroun
           </motion.div>
@@ -283,7 +283,7 @@ export function HeroSection({ onRegister, onDemo }: HeroSectionProps) {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.15 + i * 0.06, duration: 0.5 }}>
                 {['intelligente', 'Smart', 'intelligente,', 'Farming'].includes(word)
-                  ? <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-teal-500">{word}</span>
+                  ? <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-blue-500">{word}</span>
                   : word}
               </motion.span>
             ))}
@@ -301,7 +301,7 @@ export function HeroSection({ onRegister, onDemo }: HeroSectionProps) {
             {[
               { Icon: Thermometer, label: '28°C', sub: 'Temp. sol', colorClass: 'text-red-500' },
               { Icon: Droplets,    label: '72%',  sub: 'Humidité',  colorClass: 'text-blue-500' },
-              { Icon: Wifi,        label: '12',   sub: 'Capteurs',  colorClass: 'text-emerald-500' },
+              { Icon: Wifi,        label: '12',   sub: 'Capteurs',  colorClass: 'text-cyan-500' },
               { Icon: Cpu,         label: 'IA',   sub: 'En ligne',  colorClass: 'text-purple-500' },
             ].map((item, i) => (
               <motion.div key={item.sub} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.55 + i * 0.08 }}
@@ -319,13 +319,13 @@ export function HeroSection({ onRegister, onDemo }: HeroSectionProps) {
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.65 }}
             className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
             <MagneticButton onClick={onRegister}
-              className="group flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold rounded-xl shadow-lg shadow-emerald-600/25 transition-all duration-200 text-sm">
+              className="group flex items-center gap-2 px-7 py-3.5 bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-500 hover:to-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-cyan-600/25 transition-all duration-200 text-sm">
               {t('hero.cta.free')}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </MagneticButton>
             <MagneticButton onClick={onDemo}
-              className="group flex items-center gap-2 px-7 py-3.5 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-xl hover:border-emerald-300 dark:hover:border-emerald-600 transition-all duration-200 text-sm shadow-sm">
-              <Play className="w-4 h-4 text-emerald-500" />
+              className="group flex items-center gap-2 px-7 py-3.5 bg-white dark:bg-slate-800 border border-gray-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-semibold rounded-xl hover:border-cyan-300 dark:hover:border-cyan-600 transition-all duration-200 text-sm shadow-sm">
+              <Play className="w-4 h-4 text-cyan-500" />
               {t('hero.cta.demo')}
             </MagneticButton>
           </motion.div>
@@ -334,7 +334,7 @@ export function HeroSection({ onRegister, onDemo }: HeroSectionProps) {
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.9 }}
             className="flex items-center gap-4 mt-8 pt-8 border-t border-gray-100 dark:border-slate-800">
             <div className="flex -space-x-2">
-              {['#ef4444','#f59e0b','#22c55e','#3b82f6'].map((c, i) => (
+              {['#ef4444','#f59e0b','#06b6d4','#3b82f6'].map((c, i) => (
                 <div key={i} className="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 flex items-center justify-center text-white text-xs font-bold"
                   style={{ backgroundColor: c }}>
                   {['A','B','K','S'][i]}
@@ -357,7 +357,7 @@ export function HeroSection({ onRegister, onDemo }: HeroSectionProps) {
           {/* Floating alert top-left */}
           <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
             className="absolute -top-4 -left-4 z-10 bg-white dark:bg-slate-800 rounded-xl px-3 py-2 shadow-lg border border-gray-100 dark:border-slate-700 flex items-center gap-2">
-            <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse" />
+            <div className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse" />
             <span className="text-xs font-semibold text-gray-700 dark:text-slate-300">Irrigation active</span>
           </motion.div>
 

@@ -1,11 +1,11 @@
-// src/hooks/useSensorData.ts
+﻿// src/hooks/useSensorData.ts
 import { useState, useEffect, useCallback } from "react";
 import type { SensorReading as SensorReadingLegacy, WeatherReading } from "../types";
 import { getMockCurrentReading, MOCK_WEATHER, MOCK_SENSOR_READINGS } from "../data/mockData";
 import { supabase } from "../lib/supabase";
 
 const SUPABASE_OK = Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY);
-const POLL_INTERVAL = 3000;
+const POLL_INTERVAL = 600_000; // 10 minutes
 
 function addNoise(value: number, range = 2): number {
   return Math.round((value + (Math.random() - 0.5) * range) * 10) / 10;

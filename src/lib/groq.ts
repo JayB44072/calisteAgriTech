@@ -1,7 +1,7 @@
-// Groq API — free tier: 14 400 req/day, Llama 3 70B
+﻿// Groq API — free tier: 14 400 req/day, Llama 3 70B
 // Obtenir une clé gratuite: https://console.groq.com → API Keys (format gsk_...)
 
-const GROQ_MODEL = 'llama-3.3-70b-versatile';
+const GROQ_MODEL = (import.meta.env.VITE_GROQ_MODEL as string | undefined) || 'openai/gpt-oss-120b';
 const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY as string;
 const GROQ_BASE_URL = 'https://api.groq.com/openai/v1';
 
@@ -39,7 +39,8 @@ export async function callGemini(
       model: GROQ_MODEL,
       messages,
       temperature: 0.7,
-      max_tokens: 2048,
+      max_tokens: 4096,
+      reasoning_effort: 'low',
     }),
   });
 
@@ -52,7 +53,7 @@ export async function callGemini(
   return data.choices?.[0]?.message?.content ?? '';
 }
 
-export const AGRONOME_SYSTEM_PROMPT = `Tu es CalisteAgriTechIA, un expert agronome spécialisé dans l'agriculture au Cameroun. Tu aides l'agriculteur à:
+export const AGRONOME_SYSTEM_PROMPT = `Tu es AgriTechIA, un expert agronome spécialisé dans l'agriculture au Cameroun. Tu aides l'agriculteur à:
 - Diagnostiquer les maladies des cultures locales (tomates, piments, maïs, manioc, plantain, etc.)
 - Choisir les engrais et traitements adaptés au climat tropical camerounais
 - Optimiser les récoltes en fonction des saisons (saison des pluies: mars-octobre, saison sèche: novembre-février)

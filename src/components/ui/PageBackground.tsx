@@ -1,8 +1,8 @@
-export function PageBackground({ variant = 'default' }: { variant?: 'default' | 'green' | 'blue' | 'purple' }) {
+﻿export function PageBackground({ variant = 'default' }: { variant?: 'default' | 'green' | 'blue' | 'purple' }) {
   const gradients: Record<string, { blob1: string; blob2: string; blob3: string }> = {
-    default: { blob1: 'from-emerald-400/8 to-teal-400/8', blob2: 'from-green-300/6 to-emerald-300/6', blob3: 'from-teal-400/5 to-cyan-400/5' },
-    green: { blob1: 'from-green-400/10 to-emerald-400/10', blob2: 'from-lime-300/8 to-green-300/8', blob3: 'from-emerald-400/6 to-teal-400/6' },
-    blue: { blob1: 'from-blue-400/8 to-cyan-400/8', blob2: 'from-sky-300/6 to-blue-300/6', blob3: 'from-cyan-400/5 to-teal-400/5' },
+    default: { blob1: 'from-cyan-400/8 to-blue-400/8', blob2: 'from-cyan-300/6 to-cyan-300/6', blob3: 'from-blue-400/5 to-cyan-400/5' },
+    green: { blob1: 'from-cyan-400/10 to-cyan-400/10', blob2: 'from-lime-300/8 to-cyan-300/8', blob3: 'from-cyan-400/6 to-blue-400/6' },
+    blue: { blob1: 'from-blue-400/8 to-cyan-400/8', blob2: 'from-sky-300/6 to-blue-300/6', blob3: 'from-cyan-400/5 to-blue-400/5' },
     purple: { blob1: 'from-purple-400/8 to-violet-400/8', blob2: 'from-indigo-300/6 to-purple-300/6', blob3: 'from-violet-400/5 to-purple-400/5' },
   };
   const g = gradients[variant];

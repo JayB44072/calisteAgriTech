@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+﻿import { useState, useRef } from 'react';
 import { useParcelles } from '../../hooks/useParcelles';
 import { usePlan } from '../../contexts/SubscriptionContext';
 import { useSensorData } from '../../hooks/useSensorData';
@@ -44,7 +44,7 @@ const TYPES_IRRIGATION = ['Goutte-à-goutte','Aspersion','Micro-irrigation','Sub
 const SOURCES_EAU = ['Forage','Puits','Réseau municipal','Rivière','Lac','Pluie','Réservoir'];
 
 const STATUS_CONFIG = {
-  active: { label: 'Active', color: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400' },
+  active: { label: 'Active', color: 'bg-cyan-100 text-cyan-700 dark:bg-cyan-900/40 dark:text-cyan-400' },
   inactive: { label: 'Inactive', color: 'bg-gray-100 text-gray-600 dark:bg-slate-700 dark:text-slate-400' },
   archivee: { label: 'Archivée', color: 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400' },
   en_preparation: { label: 'Préparation', color: 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400' },
@@ -150,7 +150,7 @@ function WizardModal({ onClose, onSave, initial }: { onClose: () => void; onSave
     finally { setSaving(false); }
   };
 
-  const inputCls = "w-full border border-gray-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500 transition-all";
+  const inputCls = "w-full border border-gray-200 dark:border-slate-600 rounded-xl px-4 py-2.5 text-sm bg-gray-50 dark:bg-slate-700 text-gray-900 dark:text-white outline-none focus:ring-2 focus:ring-cyan-500/30 focus:border-cyan-500 transition-all";
   const labelCls = "block text-xs font-semibold text-gray-600 dark:text-slate-400 mb-1.5";
 
   return (
@@ -172,10 +172,10 @@ function WizardModal({ onClose, onSave, initial }: { onClose: () => void; onSave
             {WIZARD_STEPS.map((s, i) => (
               <div key={s.id} className="flex items-center gap-1 flex-1">
                 <button onClick={() => step > s.id && setStep(s.id)}
-                  className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all flex-shrink-0 ${step > s.id ? 'bg-emerald-600 text-white cursor-pointer hover:bg-emerald-700' : step === s.id ? 'bg-emerald-600 text-white ring-4 ring-emerald-100 dark:ring-emerald-900/40' : 'bg-gray-100 dark:bg-slate-700 text-gray-400 dark:text-slate-500'}`}>
+                  className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all flex-shrink-0 ${step > s.id ? 'bg-cyan-600 text-white cursor-pointer hover:bg-cyan-700' : step === s.id ? 'bg-cyan-600 text-white ring-4 ring-cyan-100 dark:ring-cyan-900/40' : 'bg-gray-100 dark:bg-slate-700 text-gray-400 dark:text-slate-500'}`}>
                   {step > s.id ? <Check className="w-3.5 h-3.5" /> : s.id}
                 </button>
-                {i < WIZARD_STEPS.length - 1 && <div className={`flex-1 h-0.5 rounded-full transition-all ${step > s.id ? 'bg-emerald-600' : 'bg-gray-100 dark:bg-slate-700'}`} />}
+                {i < WIZARD_STEPS.length - 1 && <div className={`flex-1 h-0.5 rounded-full transition-all ${step > s.id ? 'bg-cyan-600' : 'bg-gray-100 dark:bg-slate-700'}`} />}
               </div>
             ))}
           </div>
@@ -215,7 +215,7 @@ function WizardModal({ onClose, onSave, initial }: { onClose: () => void; onSave
                     <label className={labelCls}>Rechercher un lieu *</label>
                     <div className="relative">
                       <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-                      {geoLoading && <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-emerald-500 animate-spin" />}
+                      {geoLoading && <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan-500 animate-spin" />}
                       <input
                         className={`${inputCls} pl-9`}
                         placeholder="Ex: Yaoundé, Douala, Bafoussam..."
@@ -228,8 +228,8 @@ function WizardModal({ onClose, onSave, initial }: { onClose: () => void; onSave
                       <div className="absolute z-20 top-full left-0 right-0 mt-1 bg-white dark:bg-slate-800 rounded-xl shadow-xl border border-gray-200 dark:border-slate-700 overflow-hidden max-h-56 overflow-y-auto">
                         {geoResults.map((r, i) => (
                           <button key={i} type="button" onClick={() => selectGeo(r)}
-                            className="w-full text-left px-4 py-3 text-sm hover:bg-emerald-50 dark:hover:bg-emerald-900/20 transition-colors border-b border-gray-50 dark:border-slate-700/50 last:border-0 flex items-start gap-2">
-                            <MapPin className="w-3.5 h-3.5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                            className="w-full text-left px-4 py-3 text-sm hover:bg-cyan-50 dark:hover:bg-cyan-900/20 transition-colors border-b border-gray-50 dark:border-slate-700/50 last:border-0 flex items-start gap-2">
+                            <MapPin className="w-3.5 h-3.5 text-cyan-500 mt-0.5 flex-shrink-0" />
                             <div>
                               <p className="font-medium text-gray-900 dark:text-white text-xs leading-tight">{r.display_name.split(',').slice(0,3).join(', ')}</p>
                               <p className="text-[10px] text-gray-400 mt-0.5">{r.address?.state ?? r.address?.country ?? ''}</p>
@@ -241,10 +241,10 @@ function WizardModal({ onClose, onSave, initial }: { onClose: () => void; onSave
                   </div>
 
                   {data.latitude && (
-                    <div className="bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-800/30 rounded-xl p-4 space-y-2">
+                    <div className="bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-800/30 rounded-xl p-4 space-y-2">
                       <div className="flex items-center gap-2 mb-1">
-                        <Check className="w-4 h-4 text-emerald-600" />
-                        <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">Localisation sélectionnée</span>
+                        <Check className="w-4 h-4 text-cyan-600" />
+                        <span className="text-xs font-semibold text-cyan-700 dark:text-cyan-400">Localisation sélectionnée</span>
                       </div>
                       <p className="text-xs text-gray-600 dark:text-slate-300 leading-relaxed">{data.adresse}</p>
                       <div className="flex gap-4 text-xs">
@@ -252,7 +252,7 @@ function WizardModal({ onClose, onSave, initial }: { onClose: () => void; onSave
                         <span className="text-gray-500">🌍 {parseFloat(data.latitude).toFixed(4)}, {parseFloat(data.longitude).toFixed(4)}</span>
                       </div>
                       {CAMEROON_SOIL_MAP[data.zone] && (
-                        <p className="text-[10px] text-emerald-600 dark:text-emerald-400 italic">
+                        <p className="text-[10px] text-cyan-600 dark:text-cyan-400 italic">
                           Sol auto-détecté : {CAMEROON_SOIL_MAP[data.zone].type}
                         </p>
                       )}
@@ -297,7 +297,7 @@ function WizardModal({ onClose, onSave, initial }: { onClose: () => void; onSave
                       {CULTURES_EXT.filter(c => c !== 'Autre').map(c => (
                         <button key={c} type="button"
                           onClick={() => { setCultureInput(c); set('culture', c); }}
-                          className={`flex flex-col items-center gap-1 p-2 rounded-xl border text-xs font-medium transition-all ${data.culture === c ? 'border-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400' : 'border-gray-100 dark:border-slate-700 text-gray-600 dark:text-slate-400 hover:border-emerald-300 dark:hover:border-emerald-700'}`}>
+                          className={`flex flex-col items-center gap-1 p-2 rounded-xl border text-xs font-medium transition-all ${data.culture === c ? 'border-cyan-500 bg-cyan-50 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-400' : 'border-gray-100 dark:border-slate-700 text-gray-600 dark:text-slate-400 hover:border-cyan-300 dark:hover:border-cyan-700'}`}>
                           <span className="text-xl">{CULTURE_ICONS[c] ?? '🌱'}</span>
                           <span className="truncate w-full text-center">{c}</span>
                         </button>
@@ -372,7 +372,7 @@ function WizardModal({ onClose, onSave, initial }: { onClose: () => void; onSave
 
               {step === 6 && (
                 <div className="space-y-3">
-                  <div className="bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-2xl p-5 border border-emerald-100 dark:border-emerald-800/30">
+                  <div className="bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20 rounded-2xl p-5 border border-cyan-100 dark:border-cyan-800/30">
                     <h4 className="font-bold text-gray-900 dark:text-white mb-3 text-lg">{data.nom || 'Sans nom'}</h4>
                     <div className="grid grid-cols-2 gap-2 text-sm">
                       {[
@@ -406,7 +406,7 @@ function WizardModal({ onClose, onSave, initial }: { onClose: () => void; onSave
           <button
             onClick={step < 6 ? () => { if (canNext()) setStep(s => s + 1); } : handleSave}
             disabled={saving || (step < 6 && !canNext())}
-            className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white py-2.5 rounded-xl text-sm font-semibold transition-all disabled:opacity-50 shadow-lg shadow-emerald-600/20"
+            className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-700 text-white py-2.5 rounded-xl text-sm font-semibold transition-all disabled:opacity-50 shadow-lg shadow-cyan-600/20"
           >
             {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : step < 6 ? <ChevronRight className="w-4 h-4" /> : <Check className="w-4 h-4" />}
             {saving ? 'Enregistrement...' : step < 6 ? 'Suivant' : (initial ? 'Modifier la parcelle' : 'Créer la parcelle')}
@@ -421,7 +421,7 @@ function WizardModal({ onClose, onSave, initial }: { onClose: () => void; onSave
 function ParcelleCard({ p, onSelect, onEdit, onDelete, onToggleIrr, index }: {
   p: Parcelle; onSelect: () => void; onEdit: () => void; onDelete: () => void; onToggleIrr: () => void; index: number;
 }) {
-  const color = CULTURE_COLORS[p.culture] ?? '#16a34a';
+  const color = CULTURE_COLORS[p.culture] ?? '#0891b2';
   const statusCfg = STATUS_CONFIG[p.statut] ?? STATUS_CONFIG.active;
 
   return (
@@ -502,7 +502,7 @@ function ParcelleDetail({ parcelleId, parcelles, onBack, onToggleIrrigation, onD
   const { sensorData, latestData, loading } = useSensorData(parcelleId);
   const [aiAnalysis, setAiAnalysis] = useState<string | null>(null);
   const [analyzing, setAnalyzing] = useState(false);
-  const color = CULTURE_COLORS[parcelle?.culture] ?? '#16a34a';
+  const color = CULTURE_COLORS[parcelle?.culture] ?? '#0891b2';
 
   const handleAnalyze = async () => {
     setAnalyzing(true);
@@ -568,7 +568,7 @@ function ParcelleDetail({ parcelleId, parcelles, onBack, onToggleIrrigation, onD
           {[
             { label: 'Température', value: `${(latestData.temperature ?? latestData.temperature_air ?? 0).toFixed(1)}°C`, icon: Thermometer, color: 'from-red-50 to-orange-50 dark:from-red-900/20 dark:to-orange-900/20', textColor: 'text-red-600 dark:text-red-400', iconBg: 'bg-red-100 dark:bg-red-900/40' },
             { label: 'Humidité Sol', value: `${(latestData.humidite_sol ?? 0).toFixed(1)}%`, icon: Droplets, color: 'from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20', textColor: 'text-blue-600 dark:text-blue-400', iconBg: 'bg-blue-100 dark:bg-blue-900/40' },
-            { label: 'Humidité Air', value: `${(latestData.humidite_air ?? 0).toFixed(1)}%`, icon: Wind, color: 'from-cyan-50 to-teal-50 dark:from-cyan-900/20 dark:to-teal-900/20', textColor: 'text-cyan-600 dark:text-cyan-400', iconBg: 'bg-cyan-100 dark:bg-cyan-900/40' },
+            { label: 'Humidité Air', value: `${(latestData.humidite_air ?? 0).toFixed(1)}%`, icon: Wind, color: 'from-cyan-50 to-blue-50 dark:from-cyan-900/20 dark:to-blue-900/20', textColor: 'text-cyan-600 dark:text-cyan-400', iconBg: 'bg-cyan-100 dark:bg-cyan-900/40' },
           ].map(({ label, value, icon: Icon, color, textColor, iconBg }) => (
             <div key={label} className={`bg-gradient-to-br ${color} rounded-2xl p-5 border border-gray-100/50 dark:border-slate-700/50`}>
               <div className={`w-9 h-9 ${iconBg} rounded-xl flex items-center justify-center mb-3`}><Icon className={`w-4 h-4 ${textColor}`} /></div>
@@ -616,15 +616,15 @@ function ParcelleDetail({ parcelleId, parcelles, onBack, onToggleIrrigation, onD
       {/* AI Analysis */}
       <div className="bg-white dark:bg-slate-800 rounded-2xl border border-gray-100 dark:border-slate-700 p-6">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-semibold text-gray-900 dark:text-white text-sm flex items-center gap-2"><Bot className="w-4 h-4 text-emerald-500" /> Analyse IA de la parcelle</h3>
+          <h3 className="font-semibold text-gray-900 dark:text-white text-sm flex items-center gap-2"><Bot className="w-4 h-4 text-cyan-500" /> Analyse IA de la parcelle</h3>
           <button onClick={handleAnalyze} disabled={analyzing || sensorData.length === 0}
-            className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all disabled:opacity-50">
+            className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-700 text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all disabled:opacity-50">
             {analyzing ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Zap className="w-3.5 h-3.5" />}
             {analyzing ? 'Analyse...' : 'Analyser avec Gemini'}
           </button>
         </div>
         {aiAnalysis ? (
-          <div className="prose prose-sm max-w-none text-gray-700 dark:text-slate-300 whitespace-pre-wrap bg-emerald-50/50 dark:bg-emerald-900/20 rounded-xl p-4 border border-emerald-100 dark:border-emerald-800/30">{aiAnalysis}</div>
+          <div className="prose prose-sm max-w-none text-gray-700 dark:text-slate-300 whitespace-pre-wrap bg-cyan-50/50 dark:bg-cyan-900/20 rounded-xl p-4 border border-cyan-100 dark:border-cyan-800/30">{aiAnalysis}</div>
         ) : (
           <p className="text-sm text-gray-400 dark:text-slate-500">
             {sensorData.length === 0 ? 'Aucune donnée capteur disponible.' : 'Cliquez sur "Analyser" pour obtenir des recommandations personnalisées.'}
@@ -703,7 +703,7 @@ export function ParcellesTab({ userId, selectedParcelleId, onSelectParcelle }: P
             if (!canAddParcelle(parcelles.length)) { setPlanAlert(true); return; }
             setEditingParcelle(null); setShowWizard(true);
           }}
-            className="flex items-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-emerald-600/20 hover:shadow-xl active:scale-[0.98]">
+            className="flex items-center gap-2 bg-gradient-to-r from-cyan-600 to-blue-700 hover:from-cyan-700 hover:to-blue-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-lg shadow-cyan-600/20 hover:shadow-xl active:scale-[0.98]">
             <Plus className="w-4 h-4" /> Nouvelle parcelle
           </button>
         </div>
@@ -736,7 +736,7 @@ export function ParcellesTab({ userId, selectedParcelleId, onSelectParcelle }: P
         <div className="grid grid-cols-3 gap-3">
           {[
             { label: 'Total', value: parcelles.length, color: 'text-gray-900 dark:text-white' },
-            { label: 'Actives', value: activeCount, color: 'text-emerald-600 dark:text-emerald-400' },
+            { label: 'Actives', value: activeCount, color: 'text-cyan-600 dark:text-cyan-400' },
             { label: 'Irrigation ON', value: irrigationCount, color: 'text-blue-600 dark:text-blue-400' },
           ].map(({ label, value, color }) => (
             <div key={label} className="bg-white dark:bg-slate-800 rounded-xl border border-gray-100 dark:border-slate-700 p-4 text-center">
@@ -752,7 +752,7 @@ export function ParcellesTab({ userId, selectedParcelleId, onSelectParcelle }: P
         <div className="flex bg-gray-100 dark:bg-slate-700 rounded-xl p-1 gap-1 w-fit">
           {[['all', 'Toutes'], ['active', 'Actives'], ['en_preparation', 'Préparation'], ['archivee', 'Archivées']].map(([val, lbl]) => (
             <button key={val} onClick={() => setFilter(val)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${filter === val ? 'bg-white dark:bg-slate-600 text-emerald-700 dark:text-emerald-400 shadow-sm' : 'text-gray-500 dark:text-slate-400'}`}>
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${filter === val ? 'bg-white dark:bg-slate-600 text-cyan-700 dark:text-cyan-400 shadow-sm' : 'text-gray-500 dark:text-slate-400'}`}>
               {lbl}
             </button>
           ))}
@@ -771,7 +771,7 @@ export function ParcellesTab({ userId, selectedParcelleId, onSelectParcelle }: P
           </div>
           <h3 className="font-semibold text-gray-600 dark:text-slate-300 mb-1">Aucune parcelle</h3>
           <p className="text-sm text-gray-400 dark:text-slate-500 mb-5">Créez votre première parcelle agricole</p>
-          <button onClick={() => setShowWizard(true)} className="inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all">
+          <button onClick={() => setShowWizard(true)} className="inline-flex items-center gap-2 bg-cyan-600 hover:bg-cyan-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all">
             <Plus className="w-4 h-4" /> Ajouter une parcelle
           </button>
         </div>

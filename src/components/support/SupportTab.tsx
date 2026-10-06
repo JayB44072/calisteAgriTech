@@ -1,4 +1,4 @@
-// src/components/support/SupportTab.tsx
+﻿// src/components/support/SupportTab.tsx
 // Onglet support agriculteur - soumettre et suivre des tickets.
 
 import { useState, useEffect } from 'react';
@@ -28,7 +28,7 @@ interface Ticket {
 const statusConfig = {
   ouvert:   { label: 'Ouvert',   labelEn: 'Open',        color: 'text-amber-600', bg: 'bg-amber-50 dark:bg-amber-900/20',  icon: Clock },
   en_cours: { label: 'En cours', labelEn: 'In progress', color: 'text-blue-600',  bg: 'bg-blue-50 dark:bg-blue-900/20',   icon: Loader2 },
-  resolu:   { label: 'Résolu',   labelEn: 'Resolved',    color: 'text-green-600', bg: 'bg-green-50 dark:bg-green-900/20',  icon: CheckCircle },
+  resolu:   { label: 'Résolu',   labelEn: 'Resolved',    color: 'text-cyan-600', bg: 'bg-cyan-50 dark:bg-cyan-900/20',  icon: CheckCircle },
   ferme:    { label: 'Fermé',    labelEn: 'Closed',      color: 'text-gray-500',  bg: 'bg-gray-50 dark:bg-gray-900/20',   icon: Ban },
 };
 
@@ -156,10 +156,10 @@ export function SupportTab() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-700/30 rounded-xl p-4 flex items-center gap-3"
+            className="bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-200 dark:border-cyan-700/30 rounded-xl p-4 flex items-center gap-3"
           >
-            <CheckCircle className="w-5 h-5 text-green-600 dark:text-green-400" />
-            <p className="text-sm font-medium text-green-800 dark:text-green-300">
+            <CheckCircle className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
+            <p className="text-sm font-medium text-cyan-800 dark:text-cyan-300">
               {lang === 'fr'
                 ? 'Ticket soumis avec succès ! Notre équipe vous répondra sous 24h.'
                 : 'Ticket submitted! Our team will reply within 24h.'}
@@ -173,7 +173,7 @@ export function SupportTab() {
         {[
           { label: lang === 'fr' ? 'Temps de réponse' : 'Response time', value: '< 24h', icon: Clock, color: 'text-blue-600', bg: 'bg-blue-50 dark:bg-blue-900/20' },
           { label: lang === 'fr' ? 'Tickets ouverts' : 'Open tickets', value: tickets.filter(t => t.statut === 'ouvert' || t.statut === 'en_cours').length, icon: MessageSquare, color: 'text-amber-600', bg: 'bg-amber-50 dark:bg-amber-900/20' },
-          { label: lang === 'fr' ? 'Résolus' : 'Resolved', value: tickets.filter(t => t.statut === 'resolu').length, icon: CheckCircle, color: 'text-green-600', bg: 'bg-green-50 dark:bg-green-900/20' },
+          { label: lang === 'fr' ? 'Résolus' : 'Resolved', value: tickets.filter(t => t.statut === 'resolu').length, icon: CheckCircle, color: 'text-cyan-600', bg: 'bg-cyan-50 dark:bg-cyan-900/20' },
         ].map((kpi, i) => (
           <div key={i} className={`${kpi.bg} rounded-xl p-4 flex items-center gap-3`}>
             <kpi.icon className={`w-6 h-6 ${kpi.color} flex-shrink-0`} />
